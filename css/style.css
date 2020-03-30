@@ -138,6 +138,21 @@ img.thumbnail {
 .footer .field .button {
   background: transparent;
 }
+.footer .level {
+  display: block;
+  text-align: center;
+}
+.footer .level #animate {
+  animation: iconAnimate 1.33s ease-in-out infinite;
+}
+.footer .level .with-love {
+  display: inline-block;
+  margin: 0 5px;
+  color: #f00;
+}
+.footer .pd-3 {
+  padding: 0 3px;
+}
 .widget .media {
   border: none;
 }
