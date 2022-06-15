@@ -5,6 +5,9 @@
     <link>https://www.geeksong.top/categories/</link>
     <description>Recent content in Categories on 极客松</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language><atom:link href="https://www.geeksong.top/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-cn</language>
+    <managingEditor>me@example.com (Janne Kemppainen)</managingEditor>
+    <webMaster>me@example.com (Janne Kemppainen)</webMaster>
+    <copyright>2021 Janne Kemppainen All rights reserved</copyright><atom:link href="https://www.geeksong.top/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
