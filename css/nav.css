@@ -1,6 +1,6 @@
 .nav {
   box-shadow: 0 2px 2px -2px var(--shadow-color);
-  //overflow: visible;
+  overflow: visible;
   
 
   &-container {
