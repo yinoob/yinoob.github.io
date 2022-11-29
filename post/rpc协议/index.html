@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>rpc协议 &middot; 极客松</title>
+
+		
+
+		
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		<link rel="stylesheet" href="/css/nav.css">
+        
+        
+
+
+		
+		<link rel="icon" href="/favicon.ico"/>
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="极客松" />
+        
+		
+        
+
+		<script src="/js/darkmode.js"></script>
+
+
+		
+	</head>
+
+    <body>
+        
+        
+	    <nav class="nav" >
+			<div class="nav-container" >
+				<a href="/">
+					
+						<h2 class="nav-title">极客松</h2>
+					
+				</a><li style="display:inline-block;margin-right:10px;">
+                      <input type="search" class="docsearch-input" placeholder="Search" />
+                    </li><script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script>
+docsearch({
+    apiKey: "08e6362f4faab47142c72ac09f357567",
+    indexName: "blog",
+    appId: "NNU70A4BAO",
+    inputSelector: '.docsearch-input',
+    debug: false,
+});
+</script>
+<ul>
+    
+    
+        <li>
+            <a href="/about">
+                <i class='fa fa-heart'></i>
+                <span>关于我</span>
+                
+            </a>
+        </li>
+    
+        <li>
+            <a href="https://www.geeksong.top/index.xml">
+                <i class='fa fa-road'></i>
+                <span>RSS</span>
+                
+            </a>
+        </li>
+    
+
+    
+</ul>
+
+
+			</div>
+		</nav>
+        
+
+<main>
+	
+
+
+        <div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2022-11-29 22:34:16 &#43;0800 CST">November 29, 2022</time>
+</div>
+
+		<h1 class="post-title">rpc协议</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>rpc称为远程调用协议，多用于微服务之间用于数据交换。既然是协议，就可以把这个协议看成是一组规范。然而到目前为止对于rpc这个概念，业界还没有很明确的定义。</p>
+<p>rpc这个概念从诞生到现在，已经发展出了很多成熟并且性能卓著的框架。比如支持HTTP/2并且跨语言的gRPC。直接基于传输层的TCP协议的Thrift等等。</p>
+<p>现代rpc框架普遍具有的基本特性：</p>
+<ul>
+<li>
+<p>服务治理能力，服务发现，负载均衡</p>
+</li>
+<li>
+<p>高性能，微服务之间调用非常频繁。rpc协议中传输信息密度和序列化速度的提升，都会带来应用性能整体的提升。</p>
+</li>
+</ul>
+<p>rpc入门教程：</p>
+<ul>
+<li><a href="https://www.liwenzhou.com/posts/Go/gRPC/">gRPC教程 | 李文周的博客 (liwenzhou.com)</a></li>
+<li><a href="http://icyfenix.cn/architect-perspective/general-architecture/api-style/rpc.html">远程服务调用 | 凤凰架构 (icyfenix.cn)</a></li>
+<li><a href="https://www.infoq.cn/article/NR3Rd5YlUkarAhKyrZUe">字节跳动开源Volo：国内首个基于Rust语言的RPC框架_语言 &amp; 开发_字节跳动技术团队_InfoQ精选文章</a></li>
+</ul>
+<p>各种rpc框架的对比：</p>
+<ul>
+<li><a href="https://colobu.com/2016/09/05/benchmarks-of-popular-rpc-frameworks/">分布式RPC框架性能大比拼 (colobu.com)</a></li>
+<li><a href="https://www.cloudwego.io/zh/blog/2021/11/24/rpc-%E6%A1%86%E6%9E%B6-kitex-%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/">RPC 框架 Kitex 实践入门：性能测试指南 | CloudWeGo</a></li>
+</ul>
+<p>rpc框架使用到的二进制协议：</p>
+<ul>
+<li><a href="https://colobu.com/2019/10/03/protobuf-ultimate-tutorial-in-go/">Protobuf 终极教程 (colobu.com)</a></li>
+<li>[Protocol Buffers V3中文语法指南<a href="https://www.liwenzhou.com/posts/Go/Protobuf3-language-guide-zh/">翻译] | 李文周的博客 (liwenzhou.com)</a></li>
+<li><a href="https://lixiangyun.gitbook.io/protobuf3/">Protobuf3 语言指南 - protobuf3中文指南 (gitbook.io)</a></li>
+</ul>
+<p>grpc是如何跨语言的：</p>
+<ul>
+<li>通过Protobuf协议实现</li>
+</ul>
+
+		
+<footer>
+		<script src="https://utteranc.es/client.js"
+repo="yinoob/hugocomments"
+issue-term="title"
+theme="github-light"
+crossorigin="anonymous"
+async>
+</script>
+			
+			<span>
+			&copy; <time datetime="2022-11-30 07:52:32.6058368 &#43;0800 CST m=&#43;0.257197001">2022</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+	</div>
+
+	<div class="pagination">
+
+		<a href="#" class="top">Top</a>
+	</div>
+
+	<div class="post-comment">
+      
+             
+      
+      
+      
+</div>
+</main>
+
+
+        		<footer>
+		
+			
+			<span>
+			&copy; <time datetime="2022-11-30 07:52:32.6063464 &#43;0800 CST m=&#43;0.257706601">2022</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>
