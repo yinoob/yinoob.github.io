@@ -23,12 +23,5 @@
       <guid>https://www.geeksong.top/post/%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BA%93%E5%92%8C%E5%86%99%E4%BD%9C%E6%B5%81/</guid>
       <description>&lt;p&gt;最宝贵的是你的注意力和时间。最重要的是你想成为什么。 极客，对自己的领域极其熟悉，不在低水平重复。 布道师，能够对自己的领域有专业的思考，输出内容影响他人。 创业者，在某个垂直细分领域做到第一，做利他和长期主义者。&lt;/p&gt;</description>
     </item>
-    <item>
-      <title>rpc协议</title>
-      <link>https://www.geeksong.top/post/rpc%E5%8D%8F%E8%AE%AE/</link>
-      <pubDate>Tue, 29 Nov 2022 22:34:16 +0800</pubDate>
-      <guid>https://www.geeksong.top/post/rpc%E5%8D%8F%E8%AE%AE/</guid>
-      <description>&lt;p&gt;rpc称为远程调用协议，多用于微服务之间用于数据交换。既然是协议，就可以把这个协议看成是一组规范。然而到目前为止对于rpc这个概念，业界还没有很明确的定义。&lt;/p&gt;&#xA;&lt;p&gt;rpc这个概念从诞生到现在，已经发展出了很多成熟并且性能卓著的框架。比如支持HTTP/2并且跨语言的gRPC。直接基于传输层的TCP协议的Thrift等等。&lt;/p&gt;</description>
-    </item>
   </channel>
 </rss>
