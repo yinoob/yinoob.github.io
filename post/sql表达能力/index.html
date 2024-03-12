@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>SQL表达能力 &middot; 极客松</title>
+
+		
+
+		
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		<link rel="stylesheet" href="/css/nav.css">
+        
+        
+
+
+		
+		<link rel="icon" href="/favicon.ico"/>
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="极客松" />
+        
+		
+        
+
+		<script src="/js/darkmode.js"></script>
+
+
+		
+	</head>
+
+    <body>
+        
+        
+	    <nav class="nav" >
+			<div class="nav-container" >
+				<a href="/">
+					
+						<h2 class="nav-title">极客松</h2>
+					
+				</a><li style="display:inline-block;margin-right:10px;">
+                      <input type="search" class="docsearch-input" placeholder="Search" />
+                    </li><script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script>
+docsearch({
+    apiKey: "08e6362f4faab47142c72ac09f357567",
+    indexName: "blog",
+    appId: "NNU70A4BAO",
+    inputSelector: '.docsearch-input',
+    debug: false,
+});
+</script>
+<ul>
+    
+    
+        <li>
+            <a href="/about">
+                <i class='fa fa-heart'></i>
+                <span>关于我</span>
+                
+            </a>
+        </li>
+    
+        <li>
+            <a href="https://www.geeksong.top/index.xml">
+                <i class='fa fa-road'></i>
+                <span>RSS</span>
+                
+            </a>
+        </li>
+    
+
+    
+</ul>
+
+
+			</div>
+		</nav>
+        
+
+<main>
+	
+
+
+        <div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2024-03-12 18:17:55 &#43;0800 CST">March 12, 2024</time>
+</div>
+
+		<h1 class="post-title">SQL表达能力</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>这篇文章收录了平时不常见但需要时十分有用的SQL语句。</p>
+<h4 id="sql-cookbook">《SQL Cookbook》</h4>
+<h4 id="112-transforming-nulls-into-real-values">1.12 Transforming Nulls into Real Values</h4>
+<p>Use the function COALESCE to substitute real values for nulls:
+1 select coalesce(comm,0)
+2 from emp</p>
+<h4 id="23-sorting-by-substrings">2.3 Sorting by Substrings</h4>
+<p>Use the SUBSTR function in the ORDER BY clause:
+select ename,job
+from emp
+order by substr(job,length(job)-1)</p>
+<h4 id="24-sorting-mixed-alphanumeric-data">2.4 Sorting Mixed Alphanumeric Data</h4>
+<p>Use the functions REPLACE and TRANSLATE to modify the string for sorting:
+/* ORDER BY DEPTNO <em>/
+1 select data
+2 from V
+3 order by replace(data,
+4 replace(
+5 translate(data,&lsquo;0123456789&rsquo;,&rsquo;##########&rsquo;),&rsquo;#&rsquo;,&rsquo;&rsquo;),&rsquo;&rsquo;)
+/</em> ORDER BY ENAME */
+1 select data
+2 from V
+3 order by replace(
+4 translate(data,&lsquo;0123456789&rsquo;,&rsquo;##########&rsquo;),&rsquo;#&rsquo;,&rsquo;&rsquo;)</p>
+<h4 id="26-sorting-on-a-data-dependent-key">2.6 Sorting on a Data-Dependent Key</h4>
+<p>Use a CASE expression in the ORDER BY clause:
+1 select ename,sal,job,comm
+2 from emp
+3 order by case when job = &lsquo;SALESMAN&rsquo; then comm else sal end</p>
+<h4 id="31-stacking-one-rowset-atop-another">3.1 Stacking One Rowset atop Another</h4>
+<p>Use the set operation UNION ALL to combine rows from multiple tables:</p>
+<p>1 select ename as ename_and_dname, deptno
+2 from emp
+3 where deptno = 10
+4 union all
+5 select &lsquo;&mdash;&mdash;&mdash;-&rsquo;, null
+6 from t1
+7 union all
+8 select dname, deptno
+9 from dept</p>
+<h4 id="34-retrieving-values-from-one-table-that-do-not-exist-in-another">3.4 Retrieving Values from One Table That Do Not Exist in Another</h4>
+<p>DB2, PostgreSQL, and SQL Server
+Use the set operation EXCEPT:
+1 select deptno from dept
+2 except
+3 select deptno from emp
+Oracle
+Use the set operation MINUS:
+1 select deptno from dept
+2 minus
+3 select deptno from emp
+MySQL
+Use a subquery to return all DEPTNOs from table EMP into an outer query that
+searches table DEPT for rows that are not among the rows returned from the
+subquery:
+1 select deptno
+2 from dept
+3 where deptno not in (select deptno from emp)</p>
+<h4 id="35-retrieving-rows-from-one-table-that-do-not-correspond-to-rows-in-another">3.5 Retrieving Rows from One Table That Do Not Correspond to Rows in Another</h4>
+<p>Use an outer join and filter for NULLs (keyword OUTER is optional):
+1 select d.*
+2 from dept d left outer join emp e
+3 on (d.deptno = e.deptno)
+4 where e.deptno is null</p>
+<p>把左边当作主表，即双方连接的列中主表中有，副表中可能没有。</p>
+<h4 id="45-copying-a-table-defnition">4.5 Copying a Table Defnition</h4>
+<p>Use the CREATE TABLE command with a subquery that returns no rows:
+1 create table dept_2
+2 as
+3 select *
+4 from dept
+5 where 1 = 0</p>
+<h4 id="47-blocking-inserts-to-certain-columns">4.7 Blocking Inserts to Certain Columns</h4>
+<p>Create a view on the table exposing only those columns you want to expose. Then
+force all inserts to go through that view.
+For example, to create a view exposing the three columns in EMP:
+create view new_emps as
+select empno, ename, job
+from emp</p>
+<h4 id="411-merging-records">4.11 Merging Records</h4>
+<p>The statement designed to solve this problem is the MERGE statement, and it can
+perform either an UPDATE or an INSERT, as needed. For example:
+1 merge into emp_commission ec
+2 using (select * from emp) emp
+3 on (ec.empno=emp.empno)
+4 when matched then
+5 update set ec.comm = 1000
+6 delete where (sal &lt; 2000)
+7 when not matched then
+8 insert (ec.empno,ec.ename,ec.deptno,ec.comm)
+9 values (emp.empno,emp.ename,emp.deptno,emp.comm)</p>
+<h4 id="53-listing-indexed-columns-for-a-table">5.3 Listing Indexed Columns for a Table</h4>
+<p>PostgreSQL
+Query PG_CATALOG.PG_INDEXES and INFORMATION_SCHEMA.COLUMNS:
+1 select a.tablename,a.indexname,b.column_name
+2 from pg_catalog.pg_indexes a,
+3 information_schema.columns b
+4 where a.schemaname = &lsquo;SMEAGOL&rsquo;
+5 and a.tablename = b.table_name</p>
+<p>MySQL
+Use the SHOW INDEX command:
+show index from emp</p>
+<h4 id="chapter-6">Chapter 6</h4>
+<p>Many of the recipes that follow use the TRANSLATE and REPLACE functions that
+are now available in all the DBMSs covered in this book, with the exception of
+MySQL, which only has replace.</p>
+<h4 id="713-computing-averages-without-high-and-low-values">7.13 Computing Averages Without High and Low Values</h4>
+<p>MySQL and PostgreSQL
+Use subqueries to exclude high and low values:
+1 select avg(sal)
+2 from emp</p>
+<p>3 where sal not in (
+4 (select min(sal) from emp),
+5 (select max(sal) from emp)
+6 )</p>
+<h4 id="115-selecting-the-top-n-records">11.5 Selecting the Top n Records</h4>
+<p>The solution to this problem depends on the use of a window function. Which win‐
+dow function you will use depends on how you want to deal with ties. The following
+solution uses DENSE_RANK so that each tie in salary will count as only one against
+the total:
+1 select ename,sal
+2 from (
+3 select ename, sal,
+4 dense_rank() over (order by sal desc) dr
+5 from emp
+6 ) x
+7 where dr &lt;= 5</p>
+<h4 id="117-investigating-future-rows">11.7 Investigating Future Rows</h4>
+<p>The window function LEAD OVER is perfect for a problem such as this one. It not
+only makes for a more readable query than the solution for the other products, LEAD
+OVER also leads to a more flexible solution because an argument can be passed to it
+that will determine how many rows ahead it should look (by default one). Being able
+to leap ahead more than one row is important in the case of duplicates in the column
+you are ordering by.
+The following example shows how easy it is to use LEAD OVER to look at the salary
+of the “next” employee hired:
+select ename, sal, hiredate,
+lead(sal)over(order by hiredate) next_sal
+from emp</p>
+<h4 id="grouping">Grouping</h4>
+<p>Simply stated, grouping is a way to organize like rows together. When you use
+GROUP BY in a query, each row in the result set is a group and represents one or
+more rows with the same values in one or more columns that you specify.</p>
+<p>A SQL group will be defined as (G, e), where G is
+a result set of a single or self-contained query that uses GROUP BY, e is a member of
+G, and the following axioms are satisfied:
+• For each e in G, e is distinct and represents one or more instances of e.
+• For each e in G, the aggregate function COUNT returns a value &gt; 0.</p>
+<h4 id="windowing">Windowing</h4>
+<p>Window functions, like aggregate functions, per‐
+form an aggregation on a defined set (a group) of rows, but rather than returning one
+value per group, window functions can return multiple values for each group.</p>
+<p>group by每组返回单个值，window functions每组返回多个值。</p>
+<p>The presence of the OVER keyword indicates that the invocation of COUNT will be treated as
+a window function, not as an aggregate function. In general, the SQL standard allows
+for all aggregate functions to also be window functions, and the keyword OVER is
+how the language distinguishes between the two uses.
+So, what did the window function COUNT(*) OVER () do exactly? For every row
+being returned in the query, it returned the count of all the rows in the table. As the
+empty parentheses suggest, the OVER keyword accepts additional clauses to affect the
+range of rows that a given window function considers.</p>
+<h4 id="partitions">Partitions</h4>
+<p>You can think of the PARTITION BY clause as a “moving GROUP BY” because
+unlike a traditional GROUP BY, a group created by PARTITION BY is not distinct in
+a result set.</p>
+<p>By now it should be clear that the PARTITION BY clause works like a GROUP BY
+clause, but it does so without being affected by the other items in the SELECT clause
+and without requiring you to write a GROUP BY clause.</p>
+<p>When using COUNT, consider whether you want to include
+NULLs. Use COUNT(column) to avoid counting NULLs. Use
+COUNT(*) if you do want to include NULLs (since you are no
+longer counting actual column values, you are counting rows)</p>
+<h4 id="readability--performance--power">Readability + Performance = Power</h4>
+<p>As you can see, window functions are extremely powerful as they allow you to write
+queries that contain both detailed and aggregate information. Using window functions allows you to write smaller, more efficient queries as compared to using multiple self-join and/or scalar subqueries.</p>
+<h4 id="common-table-expressions">Common Table Expressions</h4>
+<p>We introduce the derived table using the WITH clause, specifying the column
+headings in the parentheses, and use parentheses around the derived table’s query
+itself. If we want to add more derived tables, we can add more as long as we separate
+each one with a comma and provide its name before its query (the reverse of how
+aliasing usually works in SQL).</p>
+<h4 id="mastering-sql-joins">《Mastering SQL Joins》</h4>
+<h4 id="cross-join">CROSS JOIN</h4>
+<p>CROSS JOIN is a type of SQL JOIN that simply does a CROSS PRODUCT of records from
+Table 1 and Table 2. (Considering we have CROSS JOIN applied on two tables –table 1 and
+table 2 ).
+So, If there are 3 records present in Table 1 and there are 4 records present in table 2.
+Then the final dataset after implementing the CROSS JOIN will have 3 X 4 records, i.e., 12 total
+combinations of records.</p>
+<h4 id="inner-join">INNER JOIN</h4>
+<p>Technically, &ldquo;INNER JOIN is used to select records that have matching records present in both the tables&rdquo;.</p>
+<h4 id="outer-joins">OUTER JOINS</h4>
+<p>These 3 different types of OUTER JOINS are:</p>
+<ol>
+<li>LEFT OUTER JOIN or LEFT JOIN</li>
+<li>RIGHT OUTER JOIN or RIGHT JOIN</li>
+<li>FULL OUTER JOIN or FULL JOIN</li>
+</ol>
+<p>LEFT OUTER JOIN displays ALL the records present in the LEFT table and ONLY the
+MATCHING records present in the RIGHT Table.</p>
+<p>Technically, The RIGHT OUTER JOIN selects ALL the records that are in the RIGHT table and
+then ONLY the matching records present in the LEFT table.</p>
+<p>FULL OUTER JOIN or FULL JOIN is a type of JOIN that displays ALL the records present in
+both tables irrespective of the fact whether the records are MATCHING or NOT-MATCHING
+based on the common column present in both tables.</p>
+<h4 id="sql进阶教程">《SQL进阶教程》</h4>
+<p>CASE表达式的一大优势在于能够判断表达式。也就是说，在CASE表达式里，我们可以使用BETWEEN、LIKE和&lt;、&gt;等便利的谓词组合，以及能嵌套子查询的IN和EXISTS谓词。因此，CASE表达式具有非常强大的表达能力。</p>
+<p>COUNT函数的使用方法有COUNT（＊）和COUNT（列名）两种，它们的区别有两个：第一个是性能上的区别；第二个是COUNT（＊）可以用于NULL，而COUNT（列名）与其他聚合函数一样，要先排除掉NULL的行再进行统计。第二个区别也可以这么理解：COUNT（＊）查询的是所有行的数目，而COUNT（列名）查询的则不一定是。</p>
+
+		
+<footer>
+		<script src="https://utteranc.es/client.js"
+repo="yinoob/hugocomments"
+issue-term="title"
+theme="github-light"
+crossorigin="anonymous"
+async>
+</script>
+			
+			<span>
+			&copy; <time datetime="2024-03-12 18:26:38.1472825 &#43;0800 CST m=&#43;0.301611501">2024</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+	</div>
+
+	<div class="pagination">
+		<a href="/post/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A6%82%E5%BF%B5/" class="left arrow">&#8592;</a>
+		<a href="/post/mysql%E6%80%A7%E8%83%BD%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+
+	<div class="post-comment">
+      
+             
+      
+      
+      
+</div>
+</main>
+
+
+        		<footer>
+		
+			
+			<span>
+			&copy; <time datetime="2024-03-12 18:26:38.1472825 &#43;0800 CST m=&#43;0.301611501">2024</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>
