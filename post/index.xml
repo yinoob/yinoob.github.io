@@ -6,43 +6,14 @@
     <description>Recent content in Posts on 极客松</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <copyright>2022 极客松  All rights reserved</copyright>
-    <lastBuildDate>Tue, 12 Mar 2024 18:18:23 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 30 Jun 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://www.geeksong.top/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>MySQL性能最佳实践</title>
-      <link>https://www.geeksong.top/post/mysql%E6%80%A7%E8%83%BD%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</link>
-      <pubDate>Tue, 12 Mar 2024 18:18:23 +0800</pubDate>
-      <guid>https://www.geeksong.top/post/mysql%E6%80%A7%E8%83%BD%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</guid>
-      <description>&lt;p&gt;这篇文章可以看作是《Efficient MySQL Performance Best Practices and Techniques》的书摘，作者有着多年的MySQL实战经验，解释MySQL底层原理深入浅出，充满了真知灼见。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>SQL表达能力</title>
-      <link>https://www.geeksong.top/post/sql%E8%A1%A8%E8%BE%BE%E8%83%BD%E5%8A%9B/</link>
-      <pubDate>Tue, 12 Mar 2024 18:17:55 +0800</pubDate>
-      <guid>https://www.geeksong.top/post/sql%E8%A1%A8%E8%BE%BE%E8%83%BD%E5%8A%9B/</guid>
-      <description>&lt;p&gt;这篇文章收录了平时不常见但需要时十分有用的SQL语句。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>关系型数据库概念</title>
-      <link>https://www.geeksong.top/post/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A6%82%E5%BF%B5/</link>
-      <pubDate>Tue, 12 Mar 2024 18:17:26 +0800</pubDate>
-      <guid>https://www.geeksong.top/post/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A6%82%E5%BF%B5/</guid>
-      <description>&lt;p&gt;最近在重新学习数据库，下面是关系型数据库的几个核心概念。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>学习英语旅途上的几位引路人</title>
-      <link>https://www.geeksong.top/post/%E5%AD%A6%E4%B9%A0%E8%8B%B1%E8%AF%AD%E6%97%85%E9%80%94%E4%B8%8A%E7%9A%84%E5%87%A0%E4%BD%8D%E5%BC%95%E8%B7%AF%E4%BA%BA/</link>
-      <pubDate>Mon, 11 Mar 2024 21:22:33 +0800</pubDate>
-      <guid>https://www.geeksong.top/post/%E5%AD%A6%E4%B9%A0%E8%8B%B1%E8%AF%AD%E6%97%85%E9%80%94%E4%B8%8A%E7%9A%84%E5%87%A0%E4%BD%8D%E5%BC%95%E8%B7%AF%E4%BA%BA/</guid>
-      <description>&lt;p&gt;英语学习并不像数学，需要很强的天赋。只要掌握了正确的方法，再加上几个月密集的输入输出，你就能感觉到明显的进步。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>构建自己的知识库和写作流</title>
-      <link>https://www.geeksong.top/post/%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BA%93%E5%92%8C%E5%86%99%E4%BD%9C%E6%B5%81/</link>
-      <pubDate>Wed, 30 Nov 2022 08:21:03 +0800</pubDate>
-      <guid>https://www.geeksong.top/post/%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BA%93%E5%92%8C%E5%86%99%E4%BD%9C%E6%B5%81/</guid>
-      <description>&lt;p&gt;最宝贵的是你的注意力和时间。最重要的是你想成为什么。 极客，对自己的领域极其熟悉，不在低水平重复。 布道师，能够对自己的领域有专业的思考，输出内容影响他人。 创业者，在某个垂直细分领域做到第一，做利他和长期主义者。&lt;/p&gt;</description>
+      <title>如何让 AI 100% 生成可靠的生产级代码</title>
+      <link>https://www.geeksong.top/post/ai-production-code/</link>
+      <pubDate>Tue, 30 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>https://www.geeksong.top/post/ai-production-code/</guid>
+      <description>一、人是主厨，AI 是副厨 AI 能写代码，不能为代码负责 在2026 年，任意一个 AI 编码工具都能在 10 秒内生成一个 CRUD 接口。但&amp;quot;能生成&amp;quot;和&amp;quot;能上线&amp;quot;之间，隔着一条鸿沟：责任归属。&#xA;AI 不会在凌晨三点被报警电话叫醒，不会在代码审查时解释&amp;quot;这个地方没想到&amp;quot;，更不会因为一个内存泄漏导致用户流失而承担责任。对代码质量负最终责任的，只能是写 Prompt 的那个人。&#xA;这里隐藏着一个核心隐喻：人是主厨，AI 是副厨。 副厨可以切菜、备料、甚至炒几道菜，但端上桌之前，主厨必须尝过每一口。不是不信任副厨——是因为主厨的名字写在菜单上。&#xA;每一行都要审查，没有例外 &amp;ldquo;AI 写的代码看起来很对&amp;quot;是最危险的幻觉。&#xA;在 Luma 项目中，我给团队定了一条铁律：AI 生成的每一行代码，必须经过人工审查才能合入主分支。 这不是效率的倒退——正好相反。AI 也会偷懒——该处理边界条件时它写了个 // TODO，该拆分函数时它堆了 200 行，该加错误处理时它假装异常不会发生。这和人类开发者的坏习惯一模一样。区别在于，同事偷懒你可以对他发火，AI 偷懒你只能打回去重写。&#xA;审查的标准只有一个：这是我要上线的项目，每一行烂代码最终都是我来扛。 风格问题让 Linter 拦，逻辑问题让测试拦，但架构上的&amp;quot;看起来能跑但三个月后会炸&amp;rdquo;——只有人能在审查时嗅出来。&#xA;实操规则：&#xA;AI 提交的 PR 必须附带接收到的 原始 Prompt，写在 PR description 里 审查时对照 Prompt 和实现，只判断&amp;quot;AI 是否理解错了需求&amp;quot; 代码风格、格式化等低级问题由 Lint/Format 工具自动拦下，不消耗人的注意力 全栈开发，减少沟通损耗 在团队开发中，一个容易被忽视的事实：当编码不再是瓶颈时，沟通成为新的瓶颈。&#xA;传统团队里，前端等后端接口、后端等产品确认、产品等 QA 出测试报告——每个环节都在发生信息损耗。AI 让单兵作战能力指数级增长，但前提是这个人能串起全链路。&#xA;全栈的意义不是贴标签，而是让全栈工程师对上下游有足够的判断力。当一个人既能写前端组件，又知道后端 API 怎么设计最合理时，Prompt 天然少了歧义——不需要向前端同事解释需求，因为自己就是那个同事。&#xA;判断力是 AI 时代最稀缺的资源 AI 可以替代经验中的&amp;quot;记忆&amp;quot;部分——不再需要记住 API 参数顺序、不再需要记住框架语法。但它替代不了判断力：</description>
     </item>
   </channel>
 </rss>
