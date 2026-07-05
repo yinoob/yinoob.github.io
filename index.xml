@@ -13,77 +13,77 @@
       <link>https://www.geeksong.top/post/ai-production-code/</link>
       <pubDate>Tue, 30 Jun 2026 00:00:00 +0000</pubDate>
       <guid>https://www.geeksong.top/post/ai-production-code/</guid>
-      <description>一、人是主厨，AI 是副厨 AI 能写代码，不能为代码负责 在2026 年，任意一个 AI 编码工具都能在 10 秒内生成一个 CRUD 接口。但&amp;quot;能生成&amp;quot;和&amp;quot;能上线&amp;quot;之间，隔着一条鸿沟：责任归属。&#xA;AI 不会在凌晨三点被报警电话叫醒，不会在代码审查时解释&amp;quot;这个地方没想到&amp;quot;，更不会因为一个内存泄漏导致用户流失而承担责任。对代码质量负最终责任的，只能是写 Prompt 的那个人。</description>
+      <description>&lt;h2 id=&#34;一人是主厨ai-是副厨&#34;&gt;一、人是主厨，AI 是副厨&lt;/h2&gt;&#xA;&lt;h3 id=&#34;ai-能写代码不能为代码&#34;&gt;AI 能写代码，不能为代码…&lt;/h3&gt;</description>
     </item>
     <item>
       <title>mysql性能最佳实践</title>
       <link>https://www.geeksong.top/post/mysql%E6%80%A7%E8%83%BD%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</link>
       <pubDate>Tue, 12 Mar 2024 00:00:00 +0000</pubDate>
       <guid>https://www.geeksong.top/post/mysql%E6%80%A7%E8%83%BD%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</guid>
-      <description>Written by&#xA;on March 12, 2024&#xD;MySQL性能最佳实践 这篇文章可以看作是《Efficient MySQL Performance Best Practices and Techniques》的书摘，作者有着多年的MySQL实战经验，解释MySQL底层原理深入浅出，充满了真知灼见。&#xA;Chapter 1 Query Response Time</description>
+      <description>&lt;p&gt;Written by&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt; …&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     <item>
       <title>sql表达能力</title>
       <link>https://www.geeksong.top/post/sql%E8%A1%A8%E8%BE%BE%E8%83%BD%E5%8A%9B/</link>
       <pubDate>Tue, 12 Mar 2024 00:00:00 +0000</pubDate>
       <guid>https://www.geeksong.top/post/sql%E8%A1%A8%E8%BE%BE%E8%83%BD%E5%8A%9B/</guid>
-      <description>Written by&#xA;on March 12, 2024&#xD;SQL表达能力 这篇文章收录了平时不常见但需要时十分有用的SQL语句。&#xA;《SQL Cookbook》 1.12 Transforming Nulls into Real Values</description>
+      <description>&lt;p&gt;Written by&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt; …&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     <item>
       <title>关系型数据库概念</title>
       <link>https://www.geeksong.top/post/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A6%82%E5%BF%B5/</link>
       <pubDate>Tue, 12 Mar 2024 00:00:00 +0000</pubDate>
       <guid>https://www.geeksong.top/post/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A6%82%E5%BF%B5/</guid>
-      <description>Written by&#xA;on March 12, 2024&#xD;关系型数据库概念 最近在重新学习数据库，下面是关系型数据库的几个核心概念。&#xA;数据库范式&#xA;数据库范式化设计，一般来说达到3NF程度就够用了，过度的范式化设计也会带来额外的复杂度。从1NF到3NF层层递进，更高的范式也是基于前一个范式的基础。&#xA;1NF 的设计原则：1) 表中的内容不可再分 2) 表中不允许有重复行，或者说应该有主键 3) 表中不允许存在重复列 2NF的设计原则：表中不存在部分依赖。换句话说，就是表中所有非主键元素都应该依赖主键。员工表可以有员工的毕业学校，而该学校的简介不应该放在员工表中。</description>
+      <description>&lt;p&gt;Written by&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt; …&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     <item>
       <title>学习英语旅途上的几位引路人</title>
       <link>https://www.geeksong.top/post/%E5%AD%A6%E4%B9%A0%E8%8B%B1%E8%AF%AD%E6%97%85%E9%80%94%E4%B8%8A%E7%9A%84%E5%87%A0%E4%BD%8D%E5%BC%95%E8%B7%AF%E4%BA%BA/</link>
       <pubDate>Mon, 11 Mar 2024 00:00:00 +0000</pubDate>
       <guid>https://www.geeksong.top/post/%E5%AD%A6%E4%B9%A0%E8%8B%B1%E8%AF%AD%E6%97%85%E9%80%94%E4%B8%8A%E7%9A%84%E5%87%A0%E4%BD%8D%E5%BC%95%E8%B7%AF%E4%BA%BA/</guid>
-      <description>Written by&#xA;on March 11, 2024&#xD;学习英语旅途上的几位引路人 英语学习并不像数学，需要很强的天赋。只要掌握了正确的方法，再加上几个月密集的输入输出，你就能感觉到明显的进步。&#xA;方法论&#xA;给大家推荐三本教授英语学习方法论的书。&#xA;《英语高效学习法》&#xA;《把你的英语用起来》&#xA;《我在100天内自学英文翻转人生》&#xA;下面是对这三本书的介绍。&#xA;《英语高效学习法》这本书，开篇就指出了英语学习者常见的几个误区，误区一学英语不需要专门学习语法，误区二学英语掌握几千个单词就够了，误区三学不好英语是因为没有英语思维，误区四学好英语是一件很轻松的事，误区五过度关注英语考试。</description>
+      <description>&lt;p&gt;Written by&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt; …&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     <item>
       <title>爱的沟通</title>
       <link>https://www.geeksong.top/post/%E7%88%B1%E7%9A%84%E6%B2%9F%E9%80%9A/</link>
       <pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate>
       <guid>https://www.geeksong.top/post/%E7%88%B1%E7%9A%84%E6%B2%9F%E9%80%9A/</guid>
-      <description>Written by&#xA;on June 13, 2022&#xD;爱的沟通 女人需要依靠。不消除情绪。关注度。情绪发泄出来。安全感。情感联结。 在整个生理周期的头两周，雌激素水平会逐步上升，女性会更加友好、健谈，更加放松、镇静，但情绪上也会更加敏感。在生理周期的后两周，孕酮水平会逐渐上升，女性会变得更加易怒、更有压力、更不镇静，也会更想要独处。在这个时期，女性也会更加关注内心世界、更加有创造力。这就是女性生理周期的基本规律。 当女人处在排卵期时，她更加偏好具有进攻性的男人；当她处在非排卵期时，她更加偏好温和的男人。 只是说你需要配合女人的生物节律，有时展现出强势的特质，有时展现出温和的特质。聪明的男人知道通过在生理上和情绪上展现出不同的特质，来配合女人的节奏。&#xA;&amp;amp;#8594;&#xD;Top&#xD;</description>
+      <description>&lt;p&gt;Written by&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt; …&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     <item>
       <title>构建自己的知识库和写作流</title>
       <link>https://www.geeksong.top/post/%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BA%93%E5%92%8C%E5%86%99%E4%BD%9C%E6%B5%81/</link>
       <pubDate>Wed, 30 Nov 2022 00:00:00 +0000</pubDate>
       <guid>https://www.geeksong.top/post/%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BA%93%E5%92%8C%E5%86%99%E4%BD%9C%E6%B5%81/</guid>
-      <description>Written by&#xA;on November 30, 2022&#xD;构建自己的知识库和写作流 最宝贵的是你的注意力和时间。最重要的是你想成为什么。 极客，对自己的领域极其熟悉，不在低水平重复。 布道师，能够对自己的领域有专业的思考，输出内容影响他人。 创业者，在某个垂直细分领域做到第一，做利他和长期主义者。&#xA;成为极客，从方式出发&#xA;如何获取大量的专业知识和第一手信息？真正有思考的而不是人云亦云？&#xA;文献，使用文献管理工具Zotero，软件是实践的学科，文献偏向于理论。&#xA;教程，文章，行业报告和视频</description>
+      <description>&lt;p&gt;Written by&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt; …&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     <item>
       <title>rpc协议</title>
       <link>https://www.geeksong.top/post/rpc%E5%8D%8F%E8%AE%AE/</link>
       <pubDate>Tue, 29 Nov 2022 00:00:00 +0000</pubDate>
       <guid>https://www.geeksong.top/post/rpc%E5%8D%8F%E8%AE%AE/</guid>
-      <description>Written by&#xA;on November 29, 2022&#xD;rpc协议 rpc称为远程调用协议，多用于微服务之间用于数据交换。既然是协议，就可以把这个协议看成是一组规范。然而到目前为止对于rpc这个概念，业界还没有很明确的定义。&#xA;rpc这个概念从诞生到现在，已经发展出了很多成熟并且性能卓著的框架。比如支持HTTP/2并且跨语言的gRPC。直接基于传输层的TCP协议的Thrift等等。&#xA;现代rpc框架普遍具有的基本特性：&#xA;服务治理能力，服务发现，负载均衡&#xA;高性能，微服务之间调用非常频繁。rpc协议中传输信息密度和序列化速度的提升，都会带来应用性能整体的提升。&#xA;rpc入门教程：&#xA;gRPC教程 | 李文周的博客 (liwenzhou.</description>
+      <description>&lt;p&gt;Written by&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt; …&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     <item>
       <title>blogimg</title>
       <link>https://www.geeksong.top/post/blogimg/</link>
       <pubDate>Thu, 16 Jun 2022 00:00:00 +0000</pubDate>
       <guid>https://www.geeksong.top/post/blogimg/</guid>
-      <description>Written by&#xA;on June 16, 2022&#xD;Blogimg &amp;amp;copy; 2024 . &amp;amp;#8592;&#xD;&amp;amp;#8594;&#xD;Top&#xD;</description>
+      <description>&lt;p&gt;Written by&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt; …&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     <item>
       <title>分段</title>
       <link>https://www.geeksong.top/post/%E5%88%86%E6%AE%B5/</link>
       <pubDate>Thu, 16 Jun 2022 00:00:00 +0000</pubDate>
       <guid>https://www.geeksong.top/post/%E5%88%86%E6%AE%B5/</guid>
-      <description>Written by&#xA;on June 16, 2022&#xD;分段 最宝贵的是你的注意力和时间。 你想成为什么。 极客，对自己的领域极其熟悉，不在低水平重复。一种积攒金钱的手段，然后功成身退，开启人生的第二曲线。 布道师，能够对自己的领域有专业的思考，输出内容影响他人。 创业者，在某个垂直细分领域做到第一，做利他和长期主义者。 对于知识管理工具的要求，开源，能够确保自己的数据不丢失，全平台同步，能够长期使用。适合自己，看着舒服。卡片式，双向链接，灵活。&#xA;成为极客，从方式出发 如何获取大量的专业知识和第一手信息？真正有思考的而不是人云亦云？ 文献，使用文献管理工具Zotero，软件是实践的学科，文献偏向于理论。 该技术的官方网站，Github仓库。 书籍 微信读书。 PDF管理工具，坚果云存储，自动同步，极其方便，可以同步自己的PDF书籍，文章。 教程，文章，行业报告和视频 善用Google，stackoverflow,Github,twitter，v2ex，知乎，YouTube。 工具类网站：善用搜索工具，everything，hackr.</description>
+      <description>&lt;p&gt;Written by&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt; …&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     <item>
       <title>blog</title>
       <link>https://www.geeksong.top/post/blog/</link>
       <pubDate>Mon, 13 Jun 2022 00:00:00 +0000</pubDate>
       <guid>https://www.geeksong.top/post/blog/</guid>
-      <description>Written by&#xA;on June 13, 2022&#xD;Blog 成为极客，从方式出发 如何获取大量的专业知识和第一手信息？真正有思考的而不是人云亦云？ 文献，使用文献管理工具Zotero，软件是实践的学科，文献偏向于理论。 该技术的官方网站，Github仓库。 书籍 微信读书。 PDF管理工具，坚果云存储，自动同步，极其方便，可以同步自己的PDF书籍，文章。 教程，文章，行业报告和视频 善用Google，stackoverflow,Github,twitter，v2ex，知乎，YouTube。 工具类网站：善用搜索工具，everything，hackr.</description>
+      <description>&lt;p&gt;Written by&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt; …&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
   </channel>
 </rss>
