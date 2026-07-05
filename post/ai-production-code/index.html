@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+		
+		
+		
+		
+	
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>如何让 AI 100% 生成可靠的生产级代码 &middot; 极客松</title>
+
+		
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" href="/favicon.ico"/>
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="极客松" />
+
+		<script src="/js/darkmode.js"></script>
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					
+						<h2 class="nav-title">极客松</h2>
+					
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="/post/blog/">
+                
+                <span>Blog</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+<div id="darkModeToggle" onclick="toggleDarkMode()">
+  &#9680; 
+</div>
+
+        
+
+<main>
+	
+
+
+        <div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        yinoob
+        <br>
+        <span>on&nbsp;</span><time datetime="2026-06-30 00:00:00 &#43;0000 UTC">June 30, 2026</time>
+</div>
+
+		<h1 class="post-title">如何让 AI 100% 生成可靠的生产级代码</h1>
+<div class="post-line"></div>
+
+		
+
+		<h2 id="一人是主厨ai-是副厨">一、人是主厨，AI 是副厨</h2>
+<h3 id="ai-能写代码不能为代码负责">AI 能写代码，不能为代码负责</h3>
+<p>在2026 年，任意一个 AI 编码工具都能在 10 秒内生成一个 CRUD 接口。但&quot;能生成&quot;和&quot;能上线&quot;之间，隔着一条鸿沟：<strong>责任归属</strong>。</p>
+<p>AI 不会在凌晨三点被报警电话叫醒，不会在代码审查时解释&quot;这个地方没想到&quot;，更不会因为一个内存泄漏导致用户流失而承担责任。<strong>对代码质量负最终责任的，只能是写 Prompt 的那个人。</strong></p>
+<p>这里隐藏着一个核心隐喻：<strong>人是主厨，AI 是副厨。</strong> 副厨可以切菜、备料、甚至炒几道菜，但端上桌之前，主厨必须尝过每一口。不是不信任副厨——是因为主厨的名字写在菜单上。</p>
+<h3 id="每一行都要审查没有例外">每一行都要审查，没有例外</h3>
+<blockquote>
+<p>&ldquo;AI 写的代码看起来很对&quot;是最危险的幻觉。</p>
+</blockquote>
+<p>在 Luma 项目中，我给团队定了一条铁律：<strong>AI 生成的每一行代码，必须经过人工审查才能合入主分支。</strong> 这不是效率的倒退——正好相反。AI 也会偷懒——该处理边界条件时它写了个 <code>// TODO</code>，该拆分函数时它堆了 200 行，该加错误处理时它假装异常不会发生。这和人类开发者的坏习惯一模一样。区别在于，同事偷懒你可以对他发火，AI 偷懒你只能打回去重写。</p>
+<p>审查的标准只有一个：<strong>这是我要上线的项目，每一行烂代码最终都是我来扛。</strong> 风格问题让 Linter 拦，逻辑问题让测试拦，但架构上的&quot;看起来能跑但三个月后会炸&rdquo;——只有人能在审查时嗅出来。</p>
+<p>实操规则：</p>
+<ul>
+<li>AI 提交的 PR 必须附带接收到的 <strong>原始 Prompt</strong>，写在 PR description 里</li>
+<li>审查时对照 Prompt 和实现，只判断&quot;AI 是否理解错了需求&quot;</li>
+<li>代码风格、格式化等低级问题由 Lint/Format 工具自动拦下，不消耗人的注意力</li>
+</ul>
+<h3 id="全栈开发减少沟通损耗">全栈开发，减少沟通损耗</h3>
+<p>在团队开发中，一个容易被忽视的事实：<strong>当编码不再是瓶颈时，沟通成为新的瓶颈。</strong></p>
+<p>传统团队里，前端等后端接口、后端等产品确认、产品等 QA 出测试报告——每个环节都在发生信息损耗。AI 让单兵作战能力指数级增长，但前提是<strong>这个人能串起全链路</strong>。</p>
+<p>全栈的意义不是贴标签，而是让全栈工程师对上下游有足够的判断力。当一个人既能写前端组件，又知道后端 API 怎么设计最合理时，Prompt 天然少了歧义——不需要向前端同事解释需求，因为自己就是那个同事。</p>
+<h3 id="判断力是-ai-时代最稀缺的资源">判断力是 AI 时代最稀缺的资源</h3>
+<p>AI 可以替代经验中的&quot;记忆&quot;部分——不再需要记住 API 参数顺序、不再需要记住框架语法。但它替代不了<strong>判断力</strong>：</p>
+<ul>
+<li>这个架构决策会影响三年后的扩展性吗？</li>
+<li>这个第三方依赖明天还会维护吗？</li>
+<li>这段代码的性能瓶颈在哪里——AI 不会主动指出</li>
+</ul>
+<p>我的体会是：<strong>每到一个关键节点，人的判断力必须介入。</strong> 选型阶段，AI 可以列出所有方案的优缺点，但最终选 Go 还是 Rust、选单体还是微服务，这个决定只能人来做。AI 是工具，不是替代品。主厨的舌头，永远比副厨的刀更重要。</p>
+<hr>
+<p><em>下一章：流程是刹车，不是束缚——TDD、回归测试与多方案并行验证。</em></p>
+
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/post/mysql%E6%80%A7%E8%83%BD%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/" class="left arrow">&#8592;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			
+			<span>
+			&copy; <time datetime="2026-07-06 02:10:18.7942715 &#43;0800 CST m=&#43;0.088592101">2026</time> yinoob. Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>
