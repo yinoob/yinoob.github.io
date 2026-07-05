@@ -124,7 +124,7 @@
 <p>一个反直觉的事实：AI 写的代码越多，回归测试的投资回报率越高。</p>
 </blockquote>
 <h3 id="多方案并行验证">多方案并行验证</h3>
-<p>AI 的另一个优势是<strong>方案探索成本趋近于零</strong>。同样的需求，可以让 AI 同时生成三套不同的实现方案，分别跑测试，选性能最好、代码最简洁的那个合并。这在人类开发中是不可想象的——谁会让三个工程师写同一段代码然后只留一份？但 AI 可以。</p>
+<p>AI 的另一个优势是<strong>方案探索成本相比人工大幅降低</strong>。同样的需求，可以让 AI 同时生成三套不同的实现方案，分别跑测试，选性能最好、代码最简洁的那个合并。这在人类开发中是不可想象的——谁会让三个工程师写同一段代码然后只留一份？但 AI 可以。</p>
 <p>在 Luma 项目中，遇到复杂逻辑时的一个做法是：同时让三个不同的模型（或同一个模型用不同的 Prompt 策略）分别生成实现，跑同一套测试，比较结果。这种&quot;AI 内部竞争&quot;的方式，有效降低了单一模型输出的偏差风险。</p>
 <h3 id="流程的真正目的">流程的真正目的</h3>
 <p>流程不是为了限制 AI，是为了让 AI 跑得更快而不翻车。TDD 保证功能正确，回归测试保证没有连锁破坏，多方案并行保证没有局部最优。这三者组合起来，构成了 AI 开发的刹车系统——踩得住，才敢踩油门。</p>
@@ -227,7 +227,7 @@
         		<footer>
 			
 			<span>
-			&copy; <time datetime="2026-07-06 02:51:47.4742915 &#43;0800 CST m=&#43;0.098943001">2026</time> yinoob. Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			&copy; <time datetime="2026-07-06 02:56:46.6692084 &#43;0800 CST m=&#43;0.089416601">2026</time> yinoob. Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
 			</span>
 		</footer>
 
