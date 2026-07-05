@@ -13,35 +13,35 @@
       <link>https://www.geeksong.top/post/ai-production-code/</link>
       <pubDate>Tue, 30 Jun 2026 00:00:00 +0000</pubDate>
       <guid>https://www.geeksong.top/post/ai-production-code/</guid>
-      <description>一、人是主厨，AI 是副厨 AI 能写代码，不能为代码负责 在2026 年，任意一个 AI 编码工具都能在 10 秒内生成一个 CRUD 接口。但&amp;quot;能生成&amp;quot;和&amp;quot;能上线&amp;quot;之间，隔着一条鸿沟：责任归属。&#xA;AI 不会在凌晨三点被报警电话叫醒，不会在代码审查时解释&amp;quot;这个地方没想到&amp;quot;，更不会因为一个内存泄漏导致用户流失而承担责任。对代码质量负最终责任的，只能是写 Prompt 的那个人。&#xA;这里隐藏着一个核心隐喻：人是主厨，AI 是副厨。 副厨可以切菜、备料、甚至炒几道菜，但端上桌之前，主厨必须尝过每一口。不是不信任副厨——是因为主厨的名字写在菜单上。&#xA;每一行都要审查，没有例外 &amp;ldquo;AI 写的代码看起来很对&amp;quot;是最危险的幻觉。&#xA;在 Luma 项目中，我给团队定了一条铁律：AI 生成的每一行代码，必须经过人工审查才能合入主分支。 这不是效率的倒退——正好相反。AI 也会偷懒——该处理边界条件时它写了个 // TODO，该拆分函数时它堆了 200 行，该加错误处理时它假装异常不会发生。这和人类开发者的坏习惯一模一样。区别在于，同事偷懒你可以对他发火，AI 偷懒你只能打回去重写。&#xA;审查的标准只有一个：这是我要上线的项目，每一行烂代码最终都是我来扛。 风格问题让 Linter 拦，逻辑问题让测试拦，但架构上的&amp;quot;看起来能跑但三个月后会炸&amp;rdquo;——只有人能在审查时嗅出来。</description>
+      <description>一、人是主厨，AI 是副厨 AI 能写代码，不能为代码负责 在2026 年，任意一个 AI 编码工具都能在 10 秒内生成一个 CRUD 接口。但&amp;quot;能生成&amp;quot;和&amp;quot;能上线&amp;quot;之间，隔着一条鸿沟：责任归属。&#xA;AI 不会在凌晨三点被报警电话叫醒，不会在代码审查时解释&amp;quot;这个地方没想到&amp;quot;，更不会因为一个内存泄漏导致用户流失而承担责任。对代码质量负最终责任的，只能是写 Prompt 的那个人。</description>
     </item>
     <item>
       <title>mysql性能最佳实践</title>
       <link>https://www.geeksong.top/post/mysql%E6%80%A7%E8%83%BD%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</link>
       <pubDate>Tue, 12 Mar 2024 00:00:00 +0000</pubDate>
       <guid>https://www.geeksong.top/post/mysql%E6%80%A7%E8%83%BD%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</guid>
-      <description>Written by&#xA;on March 12, 2024&#xD;MySQL性能最佳实践 这篇文章可以看作是《Efficient MySQL Performance Best Practices and Techniques》的书摘，作者有着多年的MySQL实战经验，解释MySQL底层原理深入浅出，充满了真知灼见。&#xA;Chapter 1 Query Response Time&#xA;Do not begin by throwing hardware at the problem. Begin by using query metrics to determine what MySQL is doing, then analyze and optimize slow queries to reduce response time, and repeat.</description>
+      <description>Written by&#xA;on March 12, 2024&#xD;MySQL性能最佳实践 这篇文章可以看作是《Efficient MySQL Performance Best Practices and Techniques》的书摘，作者有着多年的MySQL实战经验，解释MySQL底层原理深入浅出，充满了真知灼见。&#xA;Chapter 1 Query Response Time</description>
     </item>
     <item>
       <title>sql表达能力</title>
       <link>https://www.geeksong.top/post/sql%E8%A1%A8%E8%BE%BE%E8%83%BD%E5%8A%9B/</link>
       <pubDate>Tue, 12 Mar 2024 00:00:00 +0000</pubDate>
       <guid>https://www.geeksong.top/post/sql%E8%A1%A8%E8%BE%BE%E8%83%BD%E5%8A%9B/</guid>
-      <description>Written by&#xA;on March 12, 2024&#xD;SQL表达能力 这篇文章收录了平时不常见但需要时十分有用的SQL语句。&#xA;《SQL Cookbook》 1.12 Transforming Nulls into Real Values&#xA;Use the function COALESCE to substitute real values for nulls: 1 select coalesce(comm,0) 2 from emp&#xA;2.3 Sorting by Substrings</description>
+      <description>Written by&#xA;on March 12, 2024&#xD;SQL表达能力 这篇文章收录了平时不常见但需要时十分有用的SQL语句。&#xA;《SQL Cookbook》 1.12 Transforming Nulls into Real Values</description>
     </item>
     <item>
       <title>关系型数据库概念</title>
       <link>https://www.geeksong.top/post/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A6%82%E5%BF%B5/</link>
       <pubDate>Tue, 12 Mar 2024 00:00:00 +0000</pubDate>
       <guid>https://www.geeksong.top/post/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A6%82%E5%BF%B5/</guid>
-      <description>Written by&#xA;on March 12, 2024&#xD;关系型数据库概念 最近在重新学习数据库，下面是关系型数据库的几个核心概念。&#xA;数据库范式&#xA;数据库范式化设计，一般来说达到3NF程度就够用了，过度的范式化设计也会带来额外的复杂度。从1NF到3NF层层递进，更高的范式也是基于前一个范式的基础。&#xA;1NF 的设计原则：1) 表中的内容不可再分 2) 表中不允许有重复行，或者说应该有主键 3) 表中不允许存在重复列 2NF的设计原则：表中不存在部分依赖。换句话说，就是表中所有非主键元素都应该依赖主键。员工表可以有员工的毕业学校，而该学校的简介不应该放在员工表中。&#xA;3NF 的设计原则：表中不存在传递依赖。换句话说，就是表中非主键元素之间不应该存在依赖关系。员工表中可以有所属部门id，但不应该有部门名称。&#xA;两个详细介绍范式设计的YouTube视频，通俗易懂。&#xA;Database Normalization 1NF 2NF 3NF (youtube.com)&#xA;1st, 2nd and 3rd Normal Form (Database Normalisation) (youtube.</description>
+      <description>Written by&#xA;on March 12, 2024&#xD;关系型数据库概念 最近在重新学习数据库，下面是关系型数据库的几个核心概念。&#xA;数据库范式&#xA;数据库范式化设计，一般来说达到3NF程度就够用了，过度的范式化设计也会带来额外的复杂度。从1NF到3NF层层递进，更高的范式也是基于前一个范式的基础。&#xA;1NF 的设计原则：1) 表中的内容不可再分 2) 表中不允许有重复行，或者说应该有主键 3) 表中不允许存在重复列 2NF的设计原则：表中不存在部分依赖。换句话说，就是表中所有非主键元素都应该依赖主键。员工表可以有员工的毕业学校，而该学校的简介不应该放在员工表中。</description>
     </item>
     <item>
       <title>学习英语旅途上的几位引路人</title>
       <link>https://www.geeksong.top/post/%E5%AD%A6%E4%B9%A0%E8%8B%B1%E8%AF%AD%E6%97%85%E9%80%94%E4%B8%8A%E7%9A%84%E5%87%A0%E4%BD%8D%E5%BC%95%E8%B7%AF%E4%BA%BA/</link>
       <pubDate>Mon, 11 Mar 2024 00:00:00 +0000</pubDate>
       <guid>https://www.geeksong.top/post/%E5%AD%A6%E4%B9%A0%E8%8B%B1%E8%AF%AD%E6%97%85%E9%80%94%E4%B8%8A%E7%9A%84%E5%87%A0%E4%BD%8D%E5%BC%95%E8%B7%AF%E4%BA%BA/</guid>
-      <description>Written by&#xA;on March 11, 2024&#xD;学习英语旅途上的几位引路人 英语学习并不像数学，需要很强的天赋。只要掌握了正确的方法，再加上几个月密集的输入输出，你就能感觉到明显的进步。&#xA;方法论&#xA;给大家推荐三本教授英语学习方法论的书。&#xA;《英语高效学习法》&#xA;《把你的英语用起来》&#xA;《我在100天内自学英文翻转人生》&#xA;下面是对这三本书的介绍。&#xA;《英语高效学习法》这本书，开篇就指出了英语学习者常见的几个误区，误区一学英语不需要专门学习语法，误区二学英语掌握几千个单词就够了，误区三学不好英语是因为没有英语思维，误区四学好英语是一件很轻松的事，误区五过度关注英语考试。&#xA;学习中文的时候，大家手上一般会有一本《新华字典》。要想学好英语，也少不了字典。学习英语的前期，可以使用中英字典，我用的是《牛津英汉高阶双解词典》。在《英语高效学习法》作者的影响下，我也改用了英英词典，是的作者一口气推荐八部英英词典。目前我用的比较多的是《韦氏在线词典》。&#xA;下面是《英语高效学习法》作者推荐的几个网站， 一个英文剧本网站：http://imsdb.com 一个论坛http://wordreference.com上面有一个英语板块，用于提问和解答英语句子问题，有不少英语母语人士活跃其中。 日常生活场景相关的英语材料，通过学习这些材料积累相应的表达 wikiHow: How-to instructions you can trust.&#xA;http://procon.org是一个非营利性质的公益网站，其成立目标是通过提供对常见争议话题的多方面观点，培养大众的批判性思维，让大众对争议性事件有更加清晰的认识。&#xA;《把你的英语用起来》该书的英语学习方法论是“i+1”原则。即在你认同输入假说的基础上进行输入练习时，一定要遵循i+1的原则，“i”即你现在的水平，“1”即比你现在稍微高一点点的难度。&#xA;《我在100天内自学英文翻转人生》这本书英语学习方法论比较简单粗暴，就是重复。观看一部影片100次的过程中，请务必记得重复循环播放各片段练习。这指的是在你看过中文字幕，掌握句子的意思之后，再看着英语字幕反复练习，直到你能完全跟上片中演员说话的速度。该方法本人亲自实践过，十分有效。&#xA;说&#xA;练习英语口语更推荐大家去面对面练习或者去YouTube找。如果想要系统性的学习发音，我推荐《美语发音秘诀》。美语发音秘诀 (豆瓣) (douban.com)&#xA;下面是《美语发音秘诀》中的一些摘要。&#xA;What is voice quality and the American sound?</description>
+      <description>Written by&#xA;on March 11, 2024&#xD;学习英语旅途上的几位引路人 英语学习并不像数学，需要很强的天赋。只要掌握了正确的方法，再加上几个月密集的输入输出，你就能感觉到明显的进步。&#xA;方法论&#xA;给大家推荐三本教授英语学习方法论的书。&#xA;《英语高效学习法》&#xA;《把你的英语用起来》&#xA;《我在100天内自学英文翻转人生》&#xA;下面是对这三本书的介绍。&#xA;《英语高效学习法》这本书，开篇就指出了英语学习者常见的几个误区，误区一学英语不需要专门学习语法，误区二学英语掌握几千个单词就够了，误区三学不好英语是因为没有英语思维，误区四学好英语是一件很轻松的事，误区五过度关注英语考试。</description>
     </item>
     <item>
       <title>爱的沟通</title>
@@ -55,14 +55,14 @@
       <link>https://www.geeksong.top/post/%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BA%93%E5%92%8C%E5%86%99%E4%BD%9C%E6%B5%81/</link>
       <pubDate>Wed, 30 Nov 2022 00:00:00 +0000</pubDate>
       <guid>https://www.geeksong.top/post/%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BA%93%E5%92%8C%E5%86%99%E4%BD%9C%E6%B5%81/</guid>
-      <description>Written by&#xA;on November 30, 2022&#xD;构建自己的知识库和写作流 最宝贵的是你的注意力和时间。最重要的是你想成为什么。 极客，对自己的领域极其熟悉，不在低水平重复。 布道师，能够对自己的领域有专业的思考，输出内容影响他人。 创业者，在某个垂直细分领域做到第一，做利他和长期主义者。&#xA;成为极客，从方式出发&#xA;如何获取大量的专业知识和第一手信息？真正有思考的而不是人云亦云？&#xA;文献，使用文献管理工具Zotero，软件是实践的学科，文献偏向于理论。&#xA;教程，文章，行业报告和视频&#xA;善用Google，stackoverflow,Github,twitter，YouTube。 工具类网站：善用搜索工具，everything，hackr.io，learn-anything.xyz 信息流网站：掘金，博客园 标注工具：Highlight，Weava，微信读书。&#xA;打造知识库&#xA;看到好的文章，书，教程，视频，第一想法是立刻去享受它。愚蠢的做法是把它收藏夹里，当然没时间的时候只能这么做，充当收藏夹的地方，Instapaper，chrome书签。 存放代码片段和项目的地方，Gist，carbon，坚果云用来存放代码代码片段，Github用来存放项目。 存放写作素材比如画的图，文章的地方，eagle，PicGo，logseq，坚果云，掘金，博客园，公众号，推特，medium，自己的博客。 存放平时想法，todo和计划的地方，flomo只负责记录想法，推特和即刻则随意发布，trello用来学习技术和过程，滴答清单负责平时生活。&#xA;成为极客，从流程出发&#xA;技术总是在不断发展的，推陈出新。而自己对技术的熟悉程度也不一样。新技术也是需要不断练习，讨论，反思才能熟悉，而熟悉的技术也需要不断练习复习巩固才能达到精通的程度。&#xA;学习新技术要善用搜索工具，Google，GitHub，hackr.io，learn-anything.xyz都有新手教程。 看书也是一种学习新技术的方式，但有时候会稍显落后，微信读书搜索。有时也可以去看看视频教程，但会显得不那么geek，Youtube，B站都有视频教程。 而大量输入信息也是一种学习的方式，类似于广度搜索。比如我想学习云原生相关的技术。前期就应该大量阅读云原生相关的文章，一篇文章也许是单独讲概念，小知识点，解决方法，对源码的解析，对技术独到的见解。 利用大佬的学习方式和经验。成为大佬除了坚持的品质，他的学习方式和路径一般来说也是先进的。大佬一般会写博客，写的博客标题也不是那么引人注目。大佬也会出教程和书，是那种经过不断打磨的书，是那种让你读了大呼过瘾的书。 当然最为geek的方式还是在Github上创建参与project。在技术学习前期，即看完新手教程之后，看完几本书，就可以去创建一个仓库，开始编写代码的编写，注意不要创建markdown仓库。寻找适合的项目也很关键，可以去造轮子，不要完全去模仿。完全去模仿教程，视频只是新手的做法。还是那句话，善用搜索工具。 到了学习的后期，可以去阅读一些项目的源码，看你对什么项目感兴趣。参与一个项目最简单的方式是提issue。当然也有更硬核的方式，那就是去读新技术相关的论文。 练习，巩固，精通老技术。成为geek的路上总有几只一直伴随着你的怪。而这些怪是打不死的，只能每天不断的和他们pk，和它们战斗的同时自身实力也在不断增强。成为geek路上的不死老怪：英语阅读口语，算法leetcode，底层技术linux，架构。如果想要从心底里战胜它们，那只能是每天固定时间的，雷打不动的练习。当然练习完成后，获得的成就感也是学习其他技术无法匹敌的。&#xA;打造极客写作流&#xA;写作是构造自身思维方式的过程。 写作就好像撒尿，你喝的水多了，憋的时间久了，自然就有尿了。写作也是扩大自身影响力的过程，前提是你能够给他人提供价值。</description>
+      <description>Written by&#xA;on November 30, 2022&#xD;构建自己的知识库和写作流 最宝贵的是你的注意力和时间。最重要的是你想成为什么。 极客，对自己的领域极其熟悉，不在低水平重复。 布道师，能够对自己的领域有专业的思考，输出内容影响他人。 创业者，在某个垂直细分领域做到第一，做利他和长期主义者。&#xA;成为极客，从方式出发&#xA;如何获取大量的专业知识和第一手信息？真正有思考的而不是人云亦云？&#xA;文献，使用文献管理工具Zotero，软件是实践的学科，文献偏向于理论。&#xA;教程，文章，行业报告和视频</description>
     </item>
     <item>
       <title>rpc协议</title>
       <link>https://www.geeksong.top/post/rpc%E5%8D%8F%E8%AE%AE/</link>
       <pubDate>Tue, 29 Nov 2022 00:00:00 +0000</pubDate>
       <guid>https://www.geeksong.top/post/rpc%E5%8D%8F%E8%AE%AE/</guid>
-      <description>Written by&#xA;on November 29, 2022&#xD;rpc协议 rpc称为远程调用协议，多用于微服务之间用于数据交换。既然是协议，就可以把这个协议看成是一组规范。然而到目前为止对于rpc这个概念，业界还没有很明确的定义。&#xA;rpc这个概念从诞生到现在，已经发展出了很多成熟并且性能卓著的框架。比如支持HTTP/2并且跨语言的gRPC。直接基于传输层的TCP协议的Thrift等等。&#xA;现代rpc框架普遍具有的基本特性：&#xA;服务治理能力，服务发现，负载均衡&#xA;高性能，微服务之间调用非常频繁。rpc协议中传输信息密度和序列化速度的提升，都会带来应用性能整体的提升。&#xA;rpc入门教程：&#xA;gRPC教程 | 李文周的博客 (liwenzhou.com) 远程服务调用 | 凤凰架构 (icyfenix.cn) 字节跳动开源Volo：国内首个基于Rust语言的RPC框架_语言 &amp;amp; 开发_字节跳动技术团队_InfoQ精选文章&#xA;各种rpc框架的对比：&#xA;分布式RPC框架性能大比拼 (colobu.com) RPC 框架 Kitex 实践入门：性能测试指南 | CloudWeGo&#xA;rpc框架使用到的二进制协议：&#xA;Protobuf 终极教程 (colobu.</description>
+      <description>Written by&#xA;on November 29, 2022&#xD;rpc协议 rpc称为远程调用协议，多用于微服务之间用于数据交换。既然是协议，就可以把这个协议看成是一组规范。然而到目前为止对于rpc这个概念，业界还没有很明确的定义。&#xA;rpc这个概念从诞生到现在，已经发展出了很多成熟并且性能卓著的框架。比如支持HTTP/2并且跨语言的gRPC。直接基于传输层的TCP协议的Thrift等等。&#xA;现代rpc框架普遍具有的基本特性：&#xA;服务治理能力，服务发现，负载均衡&#xA;高性能，微服务之间调用非常频繁。rpc协议中传输信息密度和序列化速度的提升，都会带来应用性能整体的提升。&#xA;rpc入门教程：&#xA;gRPC教程 | 李文周的博客 (liwenzhou.</description>
     </item>
     <item>
       <title>blogimg</title>
@@ -76,14 +76,14 @@
       <link>https://www.geeksong.top/post/%E5%88%86%E6%AE%B5/</link>
       <pubDate>Thu, 16 Jun 2022 00:00:00 +0000</pubDate>
       <guid>https://www.geeksong.top/post/%E5%88%86%E6%AE%B5/</guid>
-      <description>Written by&#xA;on June 16, 2022&#xD;分段 最宝贵的是你的注意力和时间。 你想成为什么。 极客，对自己的领域极其熟悉，不在低水平重复。一种积攒金钱的手段，然后功成身退，开启人生的第二曲线。 布道师，能够对自己的领域有专业的思考，输出内容影响他人。 创业者，在某个垂直细分领域做到第一，做利他和长期主义者。 对于知识管理工具的要求，开源，能够确保自己的数据不丢失，全平台同步，能够长期使用。适合自己，看着舒服。卡片式，双向链接，灵活。&#xA;成为极客，从方式出发 如何获取大量的专业知识和第一手信息？真正有思考的而不是人云亦云？ 文献，使用文献管理工具Zotero，软件是实践的学科，文献偏向于理论。 该技术的官方网站，Github仓库。 书籍 微信读书。 PDF管理工具，坚果云存储，自动同步，极其方便，可以同步自己的PDF书籍，文章。 教程，文章，行业报告和视频 善用Google，stackoverflow,Github,twitter，v2ex，知乎，YouTube。 工具类网站：善用搜索工具，everything，hackr.io，learn-anything.xyz， 信息流网站：掘金，博客园， 标注工具：Highlight，Weava，微信读书。 打造知识库 看到好的文章，书，教程，视频，第一想法是立刻去享受它。愚蠢的做法是把它收藏夹里，当然没时间的时候只能这么做，充当收藏夹的地方，Instapaper，chrome书签。 存放代码片段和项目的地方，Gist，carbon，坚果云用来存放代码代码片段，Github用来存放项目。 存放写作素材比如画的图，文章的地方，eagle，PicGo，logseq，坚果云，掘金，博客园，公众号，推特，medium，自己的博客。 存放平时想法，todo和计划的地方，flomo只负责记录想法，推特和即刻则随意发布，trello用来学习技术和过程，滴答清单负责平时生活。&#xA;&amp;amp;copy; 2024 . &amp;amp;#8592;&#xD;&amp;amp;#8594;&#xD;Top&#xD;</description>
+      <description>Written by&#xA;on June 16, 2022&#xD;分段 最宝贵的是你的注意力和时间。 你想成为什么。 极客，对自己的领域极其熟悉，不在低水平重复。一种积攒金钱的手段，然后功成身退，开启人生的第二曲线。 布道师，能够对自己的领域有专业的思考，输出内容影响他人。 创业者，在某个垂直细分领域做到第一，做利他和长期主义者。 对于知识管理工具的要求，开源，能够确保自己的数据不丢失，全平台同步，能够长期使用。适合自己，看着舒服。卡片式，双向链接，灵活。&#xA;成为极客，从方式出发 如何获取大量的专业知识和第一手信息？真正有思考的而不是人云亦云？ 文献，使用文献管理工具Zotero，软件是实践的学科，文献偏向于理论。 该技术的官方网站，Github仓库。 书籍 微信读书。 PDF管理工具，坚果云存储，自动同步，极其方便，可以同步自己的PDF书籍，文章。 教程，文章，行业报告和视频 善用Google，stackoverflow,Github,twitter，v2ex，知乎，YouTube。 工具类网站：善用搜索工具，everything，hackr.</description>
     </item>
     <item>
       <title>blog</title>
       <link>https://www.geeksong.top/post/blog/</link>
       <pubDate>Mon, 13 Jun 2022 00:00:00 +0000</pubDate>
       <guid>https://www.geeksong.top/post/blog/</guid>
-      <description>Written by&#xA;on June 13, 2022&#xD;Blog 成为极客，从方式出发 如何获取大量的专业知识和第一手信息？真正有思考的而不是人云亦云？ 文献，使用文献管理工具Zotero，软件是实践的学科，文献偏向于理论。 该技术的官方网站，Github仓库。 书籍 微信读书。 PDF管理工具，坚果云存储，自动同步，极其方便，可以同步自己的PDF书籍，文章。 教程，文章，行业报告和视频 善用Google，stackoverflow,Github,twitter，v2ex，知乎，YouTube。 工具类网站：善用搜索工具，everything，hackr.io，learn-anything.xyz， 信息流网站：掘金，博客园， 标注工具：Highlight，Weava，微信读书。 打造知识库 看到好的文章，书，教程，视频，第一想法是立刻去享受它。愚蠢的做法是把它收藏夹里，当然没时间的时候只能这么做，充当收藏夹的地方，Instapaper，chrome书签。 存放代码片段和项目的地方，Gist，carbon，坚果云用来存放代码代码片段，Github用来存放项目。 存放写作素材比如画的图，文章的地方，eagle，PicGo，logseq，坚果云，掘金，博客园，公众号，推特，medium，自己的博客。 存放平时想法，todo和计划的地方，flomo只负责记录想法，推特和即刻则随意发布，trello用来学习技术和过程，滴答清单负责平时生活。&#xA;&amp;amp;copy; 2024 . &amp;amp;#8594;&#xD;Top&#xD;</description>
+      <description>Written by&#xA;on June 13, 2022&#xD;Blog 成为极客，从方式出发 如何获取大量的专业知识和第一手信息？真正有思考的而不是人云亦云？ 文献，使用文献管理工具Zotero，软件是实践的学科，文献偏向于理论。 该技术的官方网站，Github仓库。 书籍 微信读书。 PDF管理工具，坚果云存储，自动同步，极其方便，可以同步自己的PDF书籍，文章。 教程，文章，行业报告和视频 善用Google，stackoverflow,Github,twitter，v2ex，知乎，YouTube。 工具类网站：善用搜索工具，everything，hackr.</description>
     </item>
   </channel>
 </rss>
