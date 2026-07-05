@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>MySQL性能最佳实践 &middot; 极客松</title>
+
+		
+
+		
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		<link rel="stylesheet" href="/css/nav.css">
+        
+        
+
+
+		
+		<link rel="icon" href="/favicon.ico"/>
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="极客松" />
+        
+		
+        
+
+		<script src="/js/darkmode.js"></script>
+
+
+		
+	</head>
+
+    <body>
+        
+        
+	    <nav class="nav" >
+			<div class="nav-container" >
+				<a href="/">
+					
+						<h2 class="nav-title">极客松</h2>
+					
+				</a><li style="display:inline-block;margin-right:10px;">
+                      <input type="search" class="docsearch-input" placeholder="Search" />
+                    </li><script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script>
+docsearch({
+    apiKey: "08e6362f4faab47142c72ac09f357567",
+    indexName: "blog",
+    appId: "NNU70A4BAO",
+    inputSelector: '.docsearch-input',
+    debug: false,
+});
+</script>
+<ul>
+    
+    
+        <li>
+            <a href="/about">
+                <i class='fa fa-heart'></i>
+                <span>关于我</span>
+                
+            </a>
+        </li>
+    
+        <li>
+            <a href="https://www.geeksong.top/index.xml">
+                <i class='fa fa-road'></i>
+                <span>RSS</span>
+                
+            </a>
+        </li>
+    
+
+    
+</ul>
+
+
+			</div>
+		</nav>
+        
+
+<main>
+	
+
+
+        <div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2024-03-12 18:18:23 &#43;0800 CST">March 12, 2024</time>
+</div>
+
+		<h1 class="post-title">MySQL性能最佳实践</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>这篇文章可以看作是《Efficient MySQL Performance Best Practices and Techniques》的书摘，作者有着多年的MySQL实战经验，解释MySQL底层原理深入浅出，充满了真知灼见。</p>
+<h3 id="chapter-1-query-response-time">Chapter 1 Query Response Time</h3>
+<p>Do not begin by throwing hardware at the problem. Begin by using query metrics to
+determine what MySQL is doing, then analyze and optimize slow queries to reduce
+response time, and repeat. Performance will improve.</p>
+<p>不要把问题归咎于硬件。利用查询指标搞清楚MySQL在做什么，然后分析和优化慢查询，以减少查询反应时间。性能终将得到提升。</p>
+<p>The next three sections teach you about the following:
+• Sources: query metrics originate from two sources and vary by MySQL distribution and version
+• Aggregation: query metric values are grouped and aggregated by normalized
+SQL statements
+• Reporting: query reports are organized by a high-level profile and a query specific report</p>
+<p>Query metrics originate from the slow query log or the Performance Schema.</p>
+<p>两种慢查询的来源 ：slow query log和Performance Schema。</p>
+<p>Load is relative to time but also subtly indicative of concurrency:  multiple instances of a query executing at the same time. Query load less than 1.0 means that,on average, the query does not execute concurrently. Query load greater than 1.0 indicates query concurrency. For example, a query load of 3.5 means that, any
+time you look, you’re likely to see 3.5 instances of the query executing.</p>
+<p>查询并发度：多个查询实例在同一时间执行查询。查询并发度小于1意味着没有查询在并发执行。查询并发度为3.5意味着在任何时间都有3.5个实例在同时执行查询。</p>
+<p>Once you understand how MySQL executes a query, then you will understand how to optimize it. Understanding through analysis, then action through optimization.</p>
+<p>The Performance Schema provides all nine essential query metrics.</p>
+<p>Per</p>
+<p>MySQL instruments a bewildering number of events that the manual defines as, “anything the server does that takes time and has been instrumented so that timing information can be collected.” Events are
+organized in a hierarchy:
+transactions
+└── statements
+└── stages
+└── waits</p>
+<p>InnoDB supports row-level locking, so it manages data access with row locks. Since InnoDB is
+the default storage engine, row-level locking is implied unless stated otherwise.</p>
+<p>InnoDB支持行级锁，也是默认的存储引擎，所以数据库一般默认支持行级锁。</p>
+<p>There are metadata locks managed by the server that control access to schemas,
+tables, stored programs, and more. Whereas table locks and row locks control access
+to table data, metadata locks control access to table structures (columns, indexes, and
+so on) to prevent changes while queries are accessing the tables. Every query acquires
+a metadata lock on every table that it accesses. Metadata locks are released at the end
+of the transaction, not the query.</p>
+<p>元数据锁</p>
+<p>Locks are primarily used for writes (INSERT, UPDATE, DELETE, REPLACE) because rows
+must be locked before they can be written. Response time for writes depends, in
+part, on lock time.</p>
+<p>锁主要是为了写服务的，因为在写入之前一般要确保把行锁起来。</p>
+<p>For reads (SELECT), there are nonlocking and locking reads. The distinction is easy
+because there are only two locking reads: SELECT…FOR UPDATE and SELECT…FOR
+SHARE. If not one of those two, then SELECT is nonlocking, which is the normal case.</p>
+<p>读一般是无锁的。只有两种类型的的读是带锁的：SELECT…FOR UPDATE and SELECT…FOR
+SHARE。</p>
+<p>Nonlocking read does not mean non-blocking. SELECT queries must acquire shared
+metadata locks (MDL) on all tables accessed. As usual with locks, shared MDL
+are compatible with other shared MDL, but one exclusive MDL blocks all other
+MDL. ALTER TABLE is the common operation that acquires an exclusive MDL.</p>
+<p>非阻塞读不意味着完全无阻塞，会被ALTER TABLE阻塞。一般来说，shared MDL锁兼容shared MDL锁，但是一个exclusive MDL锁会阻塞其他所有锁。ALTER TABLE是exclusive MDL锁。</p>
+<h4 id="rows-examined">Rows examined</h4>
+<p>By contrast, the query SELECT c FROM
+t1 WHERE id = 2 matches and examines only one row because there is a unique
+index on column id (the primary key) and the table condition uses the entire index.</p>
+<p>主键唯一且有索引的情况下只用扫描一行。</p>
+<h4 id="rows-sent">Rows sent</h4>
+<p>Rows sent is the number of rows returned to the client—the result set size. Rows sent
+is most meaningful in relation to rows examined.</p>
+<p>行返回是指返回给客户端的行数。</p>
+<p>In fact, you can’t complete a query analysis without at least two pieces of metadata: the EXPLAIN plan
+(also called the query execution plan), and the table structure for each table.</p>
+<p>事实上，你不能在没有EXPLAIN命令和表结构的情况下完成对一个查询的完整分析。</p>
+<p>The indirect “optimization” is: TRUNCATE TABLE. With no data, MySQL can execute any query in near-zero time. That’s cheating, but it nonetheless proves the point: reducing data size improves query response time.</p>
+<p>减少数据量的大小也是提升查询反应时间的一种方法。</p>
+<h3 id="chapter-2-indexs-and-indexing">Chapter 2 Indexs and Indexing</h3>
+<p>Indexes provide the most and the best leverage. They are required for any nontrivial
+amount of data. MySQL performance requires proper indexes and indexing, both of
+which this chapter teaches in detail.</p>
+<p>索引提供了最多和最好的杠杆。</p>
+<p>Nothing special about table elem, right? It’s so simple, one might say it’s elementary.
+But what if I told you that it’s not really a table, it’s an index?</p>
+<p>以InnoDB为引擎的表也是索引。</p>
+<p>InnoDB tables are B-tree indexes organized by the primary key. Rows are index
+records stored in leaf nodes of the index structure. Each index record has metadata
+(denoted by “…”) used for row locking, transaction isolation, and so on</p>
+<p>InnoDB以主键组织起来的B树，行数据则放在叶子节点上。每行记录都有元数据用来处理行锁，事务隔离等。</p>
+<p>Secondary indexes are B-tree indexes, too, but leaf nodes store primary key values.
+When MySQL uses a secondary index to find a row, it does a second lookup on  the primary key to read the full row.</p>
+<p>次级索引也是B树。次级索引叶子节点存储的是主键的值，当MySQL使用次级索引去查找行的时候，会利用第一次找到的主键值进行第二次查找。</p>
+<p>There are three access methods:index lookup, index scan, and table scan. For an index lookup,
+there are several access types: ref, eq_ref, range, and so forth.</p>
+<p>MySQL有三种查找方式，索引查找，索引扫描，全表扫描。</p>
+<p>There are two types of index scan. The first is a full index scan, meaning MySQL
+reads all rows in index order.</p>
+<p>利用次级索引中已排列好的顺序。</p>
+<p>The second type of index scan is an index-only scan: MySQL reads column values (not
+full rows) from the index.</p>
+<p>利用次级索引中的值。</p>
+<p>To use an index, a query must use a lefmost prefx of the index: one or more index
+columns starting with the leftmost index column as specified by the index definition.</p>
+<p>最左前缀匹配原则</p>
+<p>The MySQL EXPLAIN command shows a query execution plan (or, EXPLAIN plan)
+that describes how MySQL plans to execute the query: table join order, table access
+method, index usage, and other important details.</p>
+<p>EXPLAIN语句，用于解释表的连接顺序，索引使用情况。</p>
+<p>ALL means a full table scan . index means an index scan. Any other value—const, ref, range, and so on—is an access type for an index lookup .</p>
+<p>EXPALIN中的type：ALL意味着全表扫描，index意味着索引扫描，其他类型意味着索引查找。</p>
+<p>Whenever you see type: ALL, possible_keys: NULL, or key: NULL, stop what you’re doing and analyze
+the query.</p>
+<p>当看到Explain的类型是ALL的时候，就必须对查询进行优化。</p>
+<p>MySQL can use an index to optimize GROUP BY because values are implicitly grouped
+by index order.</p>
+<p>group by 语句也能充分利用索引。</p>
+<p>Unsurprisingly, MySQL can use an ordered index to optimize ORDER BY. This opti‐
+mization avoids sorting rows, which takes a little more time, by accessing rows in
+order.</p>
+<p>不出意外的，order by也能充分利用索引。</p>
+<p>The real output of EXPLAIN ANALYZE is wider, but I wrapped and numbered the
+lines for print legibility and reference. EXPLAIN ANALYZE output is dense and requires
+practice to grok.</p>
+<p>EXPLAIN ANALYZE 能够输出更详细的执行时间细节。</p>
+<p>Covering indexes are glamorous but rarely practical because realistic queries have too
+many columns, conditions, and clauses for one index to cover. Do not spend time
+trying to create covering indexes. When designing or analyzing simple queries that
+use very few columns, take a moment to see if a covering index might work.</p>
+<p>覆盖索引听上去很迷人，但实际用处很少。</p>
+<p>Table join order is critical because MySQL joins tables in the best order possible, not
+the order tables are written in the query. You must use EXPLAIN to see the table join
+order.</p>
+<p>表的连接顺序非常关键，使用EXPLAIN可以查看表的连接顺序。</p>
+<p>MySQL can join tables without an index. This is called a full join and it’s the single
+worst thing a query can do. A table scan on a single-table query is bad, but a full join
+is worse because the table scan on the joined table does not happen once, it happens
+for every matching row from the preceding table.</p>
+<p>比全表扫描更糟的是在没有索引的列上进行连接。</p>
+<p>hash join builds an in-memory hash table of values and uses that to lookup rows rather than doing repeated table scans. Hash join is a huge performance improvement.</p>
+<p>Your job is simple: add or alter an index that you think will provide MySQL greater
+leverage, then use EXPLAIN to see if MySQL agrees by using the new index. Repeat
+until you and MySQL agree on the most optimized way to write, index, and execute
+the query.</p>
+<p>利用好索引这个杠杆。</p>
+<p>As of MySQL 8.0.20, the hash join algorithm replaces the block nested-loop join
+algorithm.</p>
+<h3 id="chapter-3-data">Chapter 3 Data</h3>
+<p>An index scan provides diminishing leverage as a table grows because the index also
+grows: more table rows, more index values.</p>
+<p>Finding matching rows is the fundamental purpose of a query, but even with a good index, a query can examine too many rows.</p>
+<p>To see the execution plan that MySQL is not choosing, EXPLAIN the query with FORCE INDEX to use an index listed in the possible_keys field.</p>
+<p>In light of this fact, MySQL DBAs commonly allocate memory for only 10% of total data size, usually rounded to standard memory values (64 GB, 128 GB, and so forth). 10% of 500 GB is 50 GB, so a DBA would probably err on the side of caution and round up to 64 GB of memory.This works surpassingly well and is a good starting point.</p>
+<p>DBA一般会分配数据量10%的内存。</p>
+<p>I define the principle of least data as: store and access only needed data. That sounds
+obvious in theory, but it’s far from the norm in practice.</p>
+<p>Efcient data access checklist
+☐ Return only needed columns
+☐ Reduce query complexity
+☐ Limit row access
+☐ Limit the result set
+☐ Avoid sorting rows</p>
+<p>只返回需要的列，降低查询的复杂度，限制查找行数，限制结果集的大小，避免排序</p>
+<h3 id="chapter-4-access-patterns">Chapter 4 Access Patterns</h3>
+<h3 id="chapter-5-sharding">Chapter 5 Sharding</h3>
+<p>Sharding a database is the common and widely used technique of scaling out (or,horizontal scaling): increasing performance by distributing the workload across multiple databases. (By contrast, scaling up, or vertical scaling, increases performance by increasing hardware capacity.)</p>
+<p>数据库分区有：Hash分区，Range分区，Lookup分区</p>
+<h4 id="hash">Hash</h4>
+<p>Hash sharding maps hash key values to shards using a hashing algorithm (to produce
+an integer hash value), the modulo operator (mod), and the number of shards (N).</p>
+<h4 id="range">Range</h4>
+<p>Range sharding defines contiguous key value ranges and maps a shard to each</p>
+<h4 id="lookup">Lookup</h4>
+<p>Lookup (or directory) sharding is custom mapping of shard key values to shards.</p>
+<p>Transactions do not work across shards. This is more of a blocker than a challenge
+because there is essentially no workaround short of implementing a two-phase com‐
+mit in the application.</p>
+<p>事务在分区之间不起作用，除了两阶段提交没有别的解决方法。</p>
+<p>A SQL statement cannot join tables across shards. The solution is a cross-shard join:
+the application join results from multiple queries executed on multiple shards.</p>
+<p>join在分区之间也不起作用，解决方法是跨分区join。</p>
+<p>NewSQL refers to a relational, ACID-compliant data store with built-in support for
+scaling out. In other words, it’s a SQL database that you don’t have to shard.</p>
+<p>NewSQL：关系型，事务兼容，支持扩展且不用分区。</p>
+<p>At the time of this writing, there are only two viable open source NewSQL solutions
+that are MySQL-compatible: TiDB and CockroachDB.</p>
+<p>When direct, manual sharding is too difficult, and NewSQL is infeasible, a middle‐
+ware solution could help bridge the gap. The two leading open source solutions are
+Vitess and ProxySQL, and they are entirely different. ProxySQL can shard and Vitess
+is sharding.</p>
+<p>手动分区是困难的，开源的分区解决方案有ProxySQL，Vitess。</p>
+<h3 id="chapter-8-transactions">Chapter 8 Transactions</h3>
+<p>Therefore, practically speaking, every MySQL query executes in a transaction by default, even a single SELECT statement.</p>
+<p>每条SQL语句默认在事务中运行，即使是单个的查询语句。</p>
+<p>Reads do not lock rows (except for SELECT…FOR SHARE and SELECT…FOR UPDATE),but writes always lock rows. That’s simple and expected, but the tricky question is:which rows must be locked? Of course, the rows being written must be locked. But in a REPEATABLE READ transaction, InnoDB can lock significantly more rows than it writes.</p>
+<p>在可重复读隔离级别中，InnoDB会锁住比写入行更多的行。</p>
+<h4 id="lock-type-abbreviation-locks-gap-locks">Lock type Abbreviation Locks gap Locks</h4>
+<h5 id="record-lock-rec_not_gap-locks-a-single-record">Record lock REC_NOT_GAP Locks a single record</h5>
+<h5 id="gap-lock-gap--locks-the-gap-before-less-than-a-record">Gap lock GAP ✓ Locks the gap before (less than) a record</h5>
+<h5 id="next-key-lock--locks-a-single-record-and-the-gap-before-it">Next-key lock ✓ Locks a single record and the gap before it</h5>
+<h5 id="insert-intention-lock-insert_intention-allows-insert-into-gap">Insert intention lock INSERT_INTENTION Allows INSERT into gap</h5>
+<p>记录锁也称行锁，间隙锁，Next-key 锁，插入锁。</p>
+<p>An UPDATE on table elem using the primary key to match rows acquires four data locks in the default transaction isolation level, REPEATABLE READ .</p>
+<p>why lock the supremum pseudo-record,which includes all primary key values greater than 5, when the table condition excludes primary key values greater than 5?</p>
+<p>在可重复读的隔离级别下，MySQL会用上next-key lock，Record lock</p>
+<p>Why does InnoDB use next-key locks that lock the gaps instead of record locks? Because the transaction isolation level is REPEATABLE READ, but that’s only part of the answer.</p>
+<p>SQL-92 standard allows phantom rows in REPEATABLE READ but InnoDB prevents them with next-key locking. But let’s not go down the proverbial rabbit hole by asking why InnoDB prevents phantom rows in REPEATABLE READ.</p>
+<p>可重复读隔离级别避免了幻读问题。</p>
+<p>Transaction isolation level READ COMMITTED disables gap locking, which includes next-key locks.</p>
+<p>在读已提交的隔离级别下，MySQL不会用到gap lock和next-key lock。</p>
+<p>In a transaction, READ COMMITTED has two important side effects:
+• The same read statement can return different rows if re-executed.
+• The same write statement can affect different rows if re-executed.</p>
+<p>读已提交隔离级别有两个副作用：同样的查询语句返回不同的结果，同样的写语句能够影响不同的行。</p>
+<h4 id="gap-locks">Gap Locks</h4>
+<p>Gap locks are purely prohibitive: they prevent other transactions from inserting rows
+into the gap.</p>
+<p>间隙锁是完全禁止的，阻止其他事务插入到行的间隙中。</p>
+<p>Gap locking is easy to disable by using READ COMMITTED. A READ COMMITTED transac‐
+tion doesn’t need gap locks (or next-key locks) because records in the gap are allowed
+to change, and each query accesses the latest latest changes (committed rows) when it
+executes.</p>
+<p>间隙锁在读已提交隔离级别中不可用。</p>
+<h4 id="insert-intention-locks">Insert Intention Locks</h4>
+<p>An insert intention lock is a special type of gap lock that means the transaction will
+insert a row into the gap when the gap is not locked by other transactions.</p>
+<p>Insert intention locks are compatible with (do not block) other insert intention locks. This is impor‐
+tant for INSERT performance because it allows multiple transactions to insert different rows into the same gap at the same time.</p>
+<p>In a sense, insert intention locks aren’t locks because they don’t block access. They’re
+more like wait conditions that InnoDB uses to signal when a transaction can proceed
+with an INSERT.</p>
+<p>InnoDB has explicit and implicit locks and it only reports explicit locks. Explicit locks exist as lock structures in memory; therefore, InnoDB can report them. But implicit locks do not exist: there is no lock structure; therefore,InnoDB has nothing to report.</p>
+<h4 id="mvcc-and-the-undo-logs">MVCC and the Undo Logs</h4>
+<p>InnoDB uses multiversion concurrency control (MVCC) and undo logs to accomplish the A, C, and I properties of ACID.</p>
+<p>InnoDB使用多版本并发控制和undo日志实现ACID中的ACI特性。</p>
+<p>Multiversion concurrency control means that changes to a row create a new version of the row. MVCC is not unique to InnoDB; it’s a common method that many data stores use.</p>
+<p>MVCC意味着给行创造了一个新版本。</p>
+<p>Undo logs record how to roll back changes to a previous row version.</p>
+<p>undo日志记录改变是如何回滚的。</p>
+<p>If the original transaction executes SELECT a FROM elem WHERE id = 2 again, it
+reads version 5 (that’s not a typo) but (figuratively) sees that that version is newer
+than the point in database history established by its snapshot. Consequently, MySQL
+uses the undo logs to roll back the row and reconstruct version 1, which is consis‐
+tent with the snapshot established by the first SELECT statement.</p>
+<p>如果初始事务第一次读到版本1，再次读读到版本5，MySQL会使用undo日志进行日志进行回滚到版本1，确保SELECT读到的数据是一致的。</p>
+<p>Snapshots only affect reads (SELECT)—they’re never used for writes. Writes always
+secretly read current rows, even if the transaction cannot “see” them with SELECT.</p>
+<p>快照读只用于SELECT语句。</p>
+<p>Transaction problems arise from the queries that constitute the transaction, how
+quickly the application executes those queries, and how quickly the application commits the transaction.</p>
+<p>MySQL is very patient—almost too patient. If the application does not commit a
+transaction, MySQL will wait even until the consequences of that active transaction
+ring its death knell.</p>
+<p>如果应用不提交事务，MySQL会一直等待直到事务结束。</p>
+<p>Either way, a large transaction is a large source of lock contention that can severely degrade write throughput and response time.</p>
+<p>长事务会对占用大量的资源，并且降低写入和查询速度。</p>
+<p>A long-running transaction takes too long to complete (commit or roll back). How
+long is too long? That depends:
+• Longer than acceptable for the application or users
+• Long enough to cause problems (likely contention) with other transactions
+• Long enough to cause a history list length alert</p>
+<p>long-running transactions have two causes:
+• The queries that constitute the transaction are too slow.
+• The application executes too many queries in the transaction.</p>
+<p>长事务之所以长：在事务中的查询语句时间长，在事务中执行过多的查询语句。</p>
+<h4 id="report-latest-query-for-transactions-active-longer-than-1-second">Report latest query for transactions active longer than 1 second</h4>
+<p>SELECT
+ROUND(trx.timer_wait/1000000000000,3) AS trx_runtime,
+trx.thread_id AS thread_id,
+trx.event_id AS trx_event_id,
+trx.isolation_level,
+trx.autocommit,
+stm.current_schema AS db,
+stm.sql_text AS query,
+stm.rows_examined AS rows_examined,
+stm.rows_affected AS rows_affected,
+stm.rows_sent AS rows_sent,
+IF(stm.end_event_id IS NULL, &lsquo;running&rsquo;, &lsquo;done&rsquo;) AS exec_state,
+ROUND(stm.timer_wait/1000000000000,3) AS exec_time
+FROM
+performance_schema.events_transactions_current trx
+JOIN performance_schema.events_statements_current stm USING (thread_id)
+WHERE
+trx.state = &lsquo;ACTIVE&rsquo;
+AND trx.timer_wait &gt; 1000000000000 * 1\G</p>
+<p>InnoDB uses consistent snapshots in REPEATABLE READ transactions to make
+reads (SELECT) return the same rows despite changes to those rows by other
+transactions.</p>
+<p>InnoDB使用一致性快照读使得读到的数据一致而不被其他事务影响。</p>
+<h4 id="chapter-9-other-chanllenges">Chapter 9 Other Chanllenges</h4>
+<p>High-performance MySQL requires practice because resources—books, blogs, videos, conferences, and so on—teach you theory, which is different than reality.</p>
+<p>参考《Efficient MySQL Performance Best Practices and Techniques》</p>
+
+		
+<footer>
+		<script src="https://utteranc.es/client.js"
+repo="yinoob/hugocomments"
+issue-term="title"
+theme="github-light"
+crossorigin="anonymous"
+async>
+</script>
+			
+			<span>
+			&copy; <time datetime="2024-03-12 18:26:38.1429219 &#43;0800 CST m=&#43;0.297250901">2024</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+	</div>
+
+	<div class="pagination">
+		<a href="/post/sql%E8%A1%A8%E8%BE%BE%E8%83%BD%E5%8A%9B/" class="left arrow">&#8592;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+
+	<div class="post-comment">
+      
+             
+      
+      
+      
+</div>
+</main>
+
+
+        		<footer>
+		
+			
+			<span>
+			&copy; <time datetime="2024-03-12 18:26:38.1429219 &#43;0800 CST m=&#43;0.297250901">2024</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>

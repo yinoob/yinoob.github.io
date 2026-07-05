@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>关系型数据库概念 &middot; 极客松</title>
+
+		
+
+		
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		<link rel="stylesheet" href="/css/nav.css">
+        
+        
+
+
+		
+		<link rel="icon" href="/favicon.ico"/>
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="极客松" />
+        
+		
+        
+
+		<script src="/js/darkmode.js"></script>
+
+
+		
+	</head>
+
+    <body>
+        
+        
+	    <nav class="nav" >
+			<div class="nav-container" >
+				<a href="/">
+					
+						<h2 class="nav-title">极客松</h2>
+					
+				</a><li style="display:inline-block;margin-right:10px;">
+                      <input type="search" class="docsearch-input" placeholder="Search" />
+                    </li><script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script>
+docsearch({
+    apiKey: "08e6362f4faab47142c72ac09f357567",
+    indexName: "blog",
+    appId: "NNU70A4BAO",
+    inputSelector: '.docsearch-input',
+    debug: false,
+});
+</script>
+<ul>
+    
+    
+        <li>
+            <a href="/about">
+                <i class='fa fa-heart'></i>
+                <span>关于我</span>
+                
+            </a>
+        </li>
+    
+        <li>
+            <a href="https://www.geeksong.top/index.xml">
+                <i class='fa fa-road'></i>
+                <span>RSS</span>
+                
+            </a>
+        </li>
+    
+
+    
+</ul>
+
+
+			</div>
+		</nav>
+        
+
+<main>
+	
+
+
+        <div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2024-03-12 18:17:26 &#43;0800 CST">March 12, 2024</time>
+</div>
+
+		<h1 class="post-title">关系型数据库概念</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>最近在重新学习数据库，下面是关系型数据库的几个核心概念。</p>
+<h3 id="数据库范式">数据库范式</h3>
+<p>数据库范式化设计，一般来说达到3NF程度就够用了，过度的范式化设计也会带来额外的复杂度。从1NF到3NF层层递进，更高的范式也是基于前一个范式的基础。</p>
+<p>1NF 的设计原则：1) 表中的内容不可再分 2) 表中不允许有重复行，或者说应该有主键 3) 表中不允许存在重复列 2NF的设计原则：表中不存在部分依赖。换句话说，就是表中所有非主键元素都应该依赖主键。员工表可以有员工的毕业学校，而该学校的简介不应该放在员工表中。</p>
+<p>3NF 的设计原则：表中不存在传递依赖。换句话说，就是表中非主键元素之间不应该存在依赖关系。员工表中可以有所属部门id，但不应该有部门名称。</p>
+<p>两个详细介绍范式设计的YouTube视频，通俗易懂。</p>
+<p><a href="https://www.youtube.com/watch?v=SK4H5tTT6-M">Database Normalization 1NF 2NF 3NF (youtube.com)</a></p>
+<p><a href="https://www.youtube.com/watch?v=J-drts33N8g">1st, 2nd and 3rd Normal Form (Database Normalisation) (youtube.com)</a></p>
+<h3 id="数据库事务">数据库事务</h3>
+<p>数据库事务ACID: 1)原子性，事务要么全部提交，要么不提交。 2)一致性，数据的状态在事务操作前和操作后保持一致的状态。即银行卡余额任何时候都应该是收入减去支出。 3)隔离性，每个事务都是互相隔离的。 4)持久性，事务一旦提交，不管是断电还是服务器重启，已经写入的数据就不会丢失。</p>
+<h3 id="mysql中的b树">MySQL中的B+树</h3>
+<p>MySQL实际使用的是B+树。B+树可以看作对B树的改进。 B+树与B树的详细对比在这篇文章中可以了解 <a href="https://www.geeksforgeeks.org/difference-between-b-tree-and-b-tree/">Difference between B tree and B+ tree - GeeksforGeeks</a></p>
+<p>而人们普遍称B+树为B树的原因也有人给出了回答<a href="https://dba.stackexchange.com/questions/204561/does-mysql-use-b-tree-btree-or-both?newreg=7a1dbf8a4870453fb5756211f5bed8c3">index - Does mysql use B-tree,B+tree or both? - Database Administrators Stack Exchange</a></p>
+<h3 id="mysql中的wal">MySQL中的WAL</h3>
+<p>WAL(Write Ahead Log)也称redo log，对数据库的持久性，崩溃恢复，时间点恢复，复制提供了支持。 一篇简单介绍WAL功能的文章<a href="https://medium.com/@atri_iiita/what-is-wal-write-ahead-log-965bc6057a19">What is WAL - Write Ahead Log?. WAL stands for Write-Ahead Log, which… | by Manish Atri | Medium</a></p>
+<p>一篇详细介绍MySQL8.0 WAL设计的文章<a href="https://dev.mysql.com/blog-archive/mysql-8-0-new-lock-free-scalable-wal-design/">MySQL :: MySQL 8.0: New Lock free, scalable WAL design</a></p>
+<h3 id="表的连接方式">表的连接方式</h3>
+<p>SQL语言中表的连接方式有：例如现有表A和表B 1）A cross join B，表A的每一行与表B的每一行互相连接。 2）A inner join B，表A与表B在相互匹配上的列上进行连接。 3）A left join B，表A与表B在匹配上的列上进行连接，且表A会展示出没有匹配的记录。4）A right join B，表A与表B在匹配上的列上进行连接，且表B会展示出没有匹配的记录。 5）A full join B，表A与表B在匹配上的列上进行连接，且表A表B都会展示出没有匹配的记录。</p>
+
+		
+<footer>
+		<script src="https://utteranc.es/client.js"
+repo="yinoob/hugocomments"
+issue-term="title"
+theme="github-light"
+crossorigin="anonymous"
+async>
+</script>
+			
+			<span>
+			&copy; <time datetime="2024-03-12 18:26:38.1459278 &#43;0800 CST m=&#43;0.300256801">2024</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+	</div>
+
+	<div class="pagination">
+		<a href="/post/%E5%AD%A6%E4%B9%A0%E8%8B%B1%E8%AF%AD%E6%97%85%E9%80%94%E4%B8%8A%E7%9A%84%E5%87%A0%E4%BD%8D%E5%BC%95%E8%B7%AF%E4%BA%BA/" class="left arrow">&#8592;</a>
+		<a href="/post/sql%E8%A1%A8%E8%BE%BE%E8%83%BD%E5%8A%9B/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+
+	<div class="post-comment">
+      
+             
+      
+      
+      
+</div>
+</main>
+
+
+        		<footer>
+		
+			
+			<span>
+			&copy; <time datetime="2024-03-12 18:26:38.1459278 &#43;0800 CST m=&#43;0.300256801">2024</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>
