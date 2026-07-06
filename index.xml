@@ -13,7 +13,7 @@
       <link>https://www.geeksong.top/post/ai-production-code/</link>
       <pubDate>Tue, 30 Jun 2026 00:00:00 +0000</pubDate>
       <guid>https://www.geeksong.top/post/ai-production-code/</guid>
-      <description>&lt;h2 id=&#34;一人是主厨ai-是副厨&#34;&gt;一、人是主厨，AI 是副厨&lt;/h2&gt;&#xA;&lt;h3 id=&#34;ai-能写代码不能为代码&#34;&gt;AI 能写代码，不能为代码…&lt;/h3&gt;</description>
+      <description>&lt;h2 id=&#34;一人是主厨ai-是副厨&#34;&gt;一、人是主厨，AI 是副厨&lt;/h2&gt;&#xA;&lt;h3 id=&#34;ai-能写代码不能为代码负责&#34;&gt;AI 能写代码，不能为代码负责&lt;/h3&gt;&#xA;&lt;p&gt;在2026 年，任意一个 AI 编码工具都能在 10 秒内生成一个 CRUD 接口。但&amp;quot;能生成&amp;quot;和&amp;quot;能上线&amp;quot;之间，隔着一条鸿沟：&lt;strong&gt;责任归属&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;AI 不会在凌晨三点被报警电话叫醒，不会在代码审查时解释&amp;quot;这个地方没想到&amp;quot;，更不会因为一个内存泄漏导致用户流失而承担责任。&lt;strong&gt;对代码质量负最终责任的，只能是写 Prompt 的那个人。&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>mysql性能最佳实践</title>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luma AI Agent 跨境电商 ERP 系统架构</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'JetBrains Mono', monospace; background: #020617; min-height: 100vh; padding: 2rem; color: white; }
+    .container { max-width: 1300px; margin: 0 auto; }
+    .header { margin-bottom: 2rem; }
+    .header-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
+    .pulse-dot { width: 12px; height: 12px; background: #22d3ee; border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.025em; }
+    .subtitle { color: #94a3b8; font-size: 0.875rem; margin-left: 1.75rem; }
+    .diagram-container { background: rgba(15, 23, 42, 0.5); border-radius: 1rem; border: 1px solid #1e293b; padding: 1.5rem; overflow-x: auto; }
+    svg { width: 100%; min-width: 1100px; display: block; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .card { background: rgba(15, 23, 42, 0.5); border-radius: 0.75rem; border: 1px solid #1e293b; padding: 1.25rem; }
+    .card-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; }
+    .card-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .card-dot.cyan { background: #22d3ee; } .card-dot.emerald { background: #34d399; } .card-dot.violet { background: #a78bfa; }
+    .card h3 { font-size: 0.875rem; font-weight: 600; }
+    .card ul { list-style: none; color: #94a3b8; font-size: 0.75rem; }
+    .card li { margin-bottom: 0.375rem; }
+    .footer { text-align: center; margin-top: 1.5rem; color: #475569; font-size: 0.75rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-row">
+        <div class="pulse-dot"></div>
+        <h1>Luma AI Agent 跨境电商 ERP 系统架构</h1>
+      </div>
+      <p class="subtitle">Java + Python 协同 · LangGraph 编排 · Text-to-SQL · 向量检索</p>
+    </div>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 1200 760">
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#64748b" /></marker>
+          <marker id="arrow-cyan" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee" /></marker>
+          <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#34d399" /></marker>
+          <marker id="arrow-violet" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#a78bfa" /></marker>
+          <marker id="arrow-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#fb923c" /></marker>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/></pattern>
+        </defs>
+
+        <rect width="100%" height="100%" fill="url(#grid)" />
+
+        <!-- ========== FRONTEND ========== -->
+        <rect x="30" y="40" width="160" height="60" rx="6" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+        <text x="110" y="63" fill="white" font-size="12" font-weight="600" text-anchor="middle">Vue3 运营面板</text>
+        <text x="110" y="79" fill="#94a3b8" font-size="9" text-anchor="middle">商品 · 数据 · 任务</text>
+        <text x="110" y="92" fill="#22d3ee" font-size="8" text-anchor="middle">luma.geeksong.top</text>
+
+        <!-- ========== API GATEWAY ========== -->
+        <rect x="260" y="40" width="140" height="60" rx="6" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+        <text x="330" y="63" fill="white" font-size="12" font-weight="600" text-anchor="middle">API Gateway</text>
+        <text x="330" y="79" fill="#94a3b8" font-size="9" text-anchor="middle">Nginx / Kong</text>
+        <text x="330" y="92" fill="#fbbf24" font-size="8" text-anchor="middle">Auth · Rate Limit</text>
+
+        <!-- Arrows: Frontend → Gateway -->
+        <line x1="190" y1="70" x2="258" y2="70" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrow-cyan)"/>
+        <text x="224" y="64" fill="#94a3b8" font-size="8" text-anchor="middle">HTTPS</text>
+
+        <!-- ========== JAVA SERVICE LAYER ========== -->
+        <rect x="470" y="20" width="620" height="290" rx="12" fill="rgba(6, 78, 59, 0.05)" stroke="#34d399" stroke-width="1" stroke-dasharray="6,3"/>
+        <text x="482" y="38" fill="#34d399" font-size="10" font-weight="600">Java 服务层</text>
+
+        <!-- Auth -->
+        <rect x="490" y="50" width="130" height="55" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="555" y="73" fill="white" font-size="11" font-weight="600" text-anchor="middle">Auth Service</text>
+        <text x="555" y="89" fill="#94a3b8" font-size="8" text-anchor="middle">RBAC · Token · SSO</text>
+
+        <!-- State Machine -->
+        <rect x="640" y="50" width="130" height="55" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="705" y="73" fill="white" font-size="11" font-weight="600" text-anchor="middle">State Machine</text>
+        <text x="705" y="89" fill="#94a3b8" font-size="8" text-anchor="middle">商品 · 任务流转</text>
+
+        <!-- Task Engine -->
+        <rect x="790" y="50" width="130" height="55" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="855" y="73" fill="white" font-size="11" font-weight="600" text-anchor="middle">Task Engine</text>
+        <text x="855" y="89" fill="#94a3b8" font-size="8" text-anchor="middle">创建 · 分配 · 验收</text>
+
+        <!-- Data Service -->
+        <rect x="940" y="50" width="130" height="55" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="1005" y="73" fill="white" font-size="11" font-weight="600" text-anchor="middle">Data Service</text>
+        <text x="1005" y="89" fill="#94a3b8" font-size="8" text-anchor="middle">结果落库 · 宽表</text>
+
+        <!-- Product Service -->
+        <rect x="490" y="125" width="160" height="55" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="570" y="148" fill="white" font-size="11" font-weight="600" text-anchor="middle">Product Service</text>
+        <text x="570" y="164" fill="#94a3b8" font-size="8" text-anchor="middle">素材 · 上架 · SKU</text>
+
+        <!-- Inventory Service -->
+        <rect x="670" y="125" width="130" height="55" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="735" y="148" fill="white" font-size="11" font-weight="600" text-anchor="middle">Inventory</text>
+        <text x="735" y="164" fill="#94a3b8" font-size="8" text-anchor="middle">库存 · 补货</text>
+
+        <!-- Ad Service -->
+        <rect x="820" y="125" width="130" height="55" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="885" y="148" fill="white" font-size="11" font-weight="600" text-anchor="middle">Ad Service</text>
+        <text x="885" y="164" fill="#94a3b8" font-size="8" text-anchor="middle">广告数据聚合</text>
+
+        <!-- Analysis Service -->
+        <rect x="970" y="125" width="100" height="55" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="1020" y="148" fill="white" font-size="11" font-weight="600" text-anchor="middle">Analysis</text>
+        <text x="1020" y="164" fill="#94a3b8" font-size="8" text-anchor="middle">指标 · 归因</text>
+
+        <!-- Java side arrows -->
+        <line x1="620" y1="77" x2="638" y2="77" stroke="#34d399" stroke-width="1" marker-end="url(#arrow-green)"/>
+        <line x1="770" y1="77" x2="788" y2="77" stroke="#34d399" stroke-width="1" marker-end="url(#arrow-green)"/>
+        <line x1="920" y1="77" x2="938" y2="77" stroke="#34d399" stroke-width="1" marker-end="url(#arrow-green)"/>
+
+        <!-- Java layer bottom section: Text-to-SQL + Metrics -->
+        <rect x="490" y="210" width="280" height="80" rx="6" fill="rgba(6, 78, 59, 0.3)" stroke="#34d399" stroke-width="1" stroke-dasharray="4,2"/>
+        <text x="630" y="233" fill="white" font-size="11" font-weight="600" text-anchor="middle">指标宽表</text>
+        <text x="630" y="252" fill="#94a3b8" font-size="8" text-anchor="middle">销售 · 库存 · 广告 · 内容</text>
+        <text x="630" y="268" fill="#94a3b8" font-size="8" text-anchor="middle">ClickHouse / StarRocks</text>
+        <text x="630" y="284" fill="#34d399" font-size="7" text-anchor="middle">Java Text-to-SQL Gateway</text>
+
+        <!-- ========== MESSAGE BUS ========== -->
+        <rect x="490" y="197" width="580" height="12" rx="3" fill="rgba(251, 146, 60, 0.3)" stroke="#fb923c" stroke-width="1"/>
+        <text x="780" y="207" fill="#fb923c" font-size="8" text-anchor="middle">RabbitMQ / Kafka · 异步任务 · 事件驱动</text>
+
+        <!-- ========== PYTHON AI LAYER ========== -->
+        <rect x="30" y="360" width="520" height="340" rx="12" fill="rgba(8, 51, 68, 0.05)" stroke="#22d3ee" stroke-width="1" stroke-dasharray="6,3"/>
+        <text x="42" y="378" fill="#22d3ee" font-size="10" font-weight="600">Python · LangGraph AI 工作流引擎</text>
+
+        <!-- LangGraph System -->
+        <rect x="50" y="390" width="480" height="45" rx="6" fill="rgba(8, 51, 68, 0.3)" stroke="#22d3ee" stroke-width="1.5"/>
+        <text x="290" y="410" fill="white" font-size="11" font-weight="600" text-anchor="middle">LangGraph Orchestrator</text>
+        <text x="290" y="425" fill="#94a3b8" font-size="8" text-anchor="middle">StateGraph · Checkpoint · interrupt/resume · 子图嵌套</text>
+
+        <!-- Workflow 1: Product Creation -->
+        <rect x="50" y="450" width="145" height="90" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="122" y="472" fill="white" font-size="10" font-weight="600" text-anchor="middle">建品工作流</text>
+        <text x="122" y="488" fill="#94a3b8" font-size="7" text-anchor="middle">标题 · 卖点 · 详情</text>
+        <text x="122" y="500" fill="#94a3b8" font-size="7" text-anchor="middle">关键词 · 图片方案</text>
+        <text x="122" y="512" fill="#94a3b8" font-size="7" text-anchor="middle">生图任务创建</text>
+        <text x="122" y="532" fill="#34d399" font-size="7" text-anchor="middle">LLM · 素材复用 · 模板</text>
+
+        <!-- Workflow 2: Diagnosis -->
+        <rect x="215" y="450" width="145" height="90" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="287" y="472" fill="white" font-size="10" font-weight="600" text-anchor="middle">诊断工作流</text>
+        <text x="287" y="488" fill="#94a3b8" font-size="7" text-anchor="middle">销售 · 库存 · 广告分析</text>
+        <text x="287" y="500" fill="#94a3b8" font-size="7" text-anchor="middle">问题归因 · 异常检测</text>
+        <text x="287" y="512" fill="#94a3b8" font-size="7" text-anchor="middle">归因报告生成</text>
+        <text x="287" y="532" fill="#34d399" font-size="7" text-anchor="middle">Text-to-SQL · 向量检索</text>
+
+        <!-- Workflow 3: Optimization -->
+        <rect x="380" y="450" width="150" height="90" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="455" y="472" fill="white" font-size="10" font-weight="600" text-anchor="middle">优化工作流</text>
+        <text x="455" y="488" fill="#94a3b8" font-size="7" text-anchor="middle">优化建议生成</text>
+        <text x="455" y="500" fill="#94a3b8" font-size="7" text-anchor="middle">任务创建 · 指派</text>
+        <text x="455" y="512" fill="#94a3b8" font-size="7" text-anchor="middle">效果验证</text>
+        <text x="455" y="532" fill="#34d399" font-size="7" text-anchor="middle">历史案例推荐</text>
+
+        <!-- Workflow 4: Review -->
+        <rect x="50" y="555" width="480" height="40" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="290" y="573" fill="white" font-size="10" font-weight="600" text-anchor="middle">复盘工作流</text>
+        <text x="290" y="588" fill="#94a3b8" font-size="8" text-anchor="middle">优化前后对比 · 经验沉淀 · 案例入库</text>
+
+        <!-- Python layer arrows -->
+        <line x1="195" y1="495" x2="213" y2="495" stroke="#34d399" stroke-width="1" marker-end="url(#arrow-green)"/>
+        <line x1="360" y1="495" x2="378" y2="495" stroke="#34d399" stroke-width="1" marker-end="url(#arrow-green)"/>
+
+        <!-- Checkpoint / Memory -->
+        <rect x="50" y="610" width="230" height="40" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="165" y="627" fill="white" font-size="10" font-weight="600" text-anchor="middle">Checkpoint Memory</text>
+        <text x="165" y="642" fill="#94a3b8" font-size="8" text-anchor="middle">Postgres · 状态恢复 · 路径回放</text>
+
+        <!-- Vector Search -->
+        <rect x="300" y="610" width="230" height="40" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="415" y="627" fill="white" font-size="10" font-weight="600" text-anchor="middle">Vector Search</text>
+        <text x="415" y="642" fill="#94a3b8" font-size="8" text-anchor="middle">Milvus · 商品 · Prompt · 案例</text>
+
+        <!-- ========== DATA STORES ========== -->
+        <rect x="600" y="340" width="490" height="400" rx="12" fill="rgba(76, 29, 149, 0.05)" stroke="#a78bfa" stroke-width="1" stroke-dasharray="6,3"/>
+        <text x="612" y="358" fill="#a78bfa" font-size="10" font-weight="600">数据层</text>
+
+        <!-- PG -->
+        <rect x="620" y="370" width="130" height="50" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="685" y="391" fill="white" font-size="11" font-weight="600" text-anchor="middle">PostgreSQL</text>
+        <text x="685" y="407" fill="#94a3b8" font-size="8" text-anchor="middle">业务数据 · State</text>
+
+        <!-- Redis -->
+        <rect x="770" y="370" width="130" height="50" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="835" y="391" fill="white" font-size="11" font-weight="600" text-anchor="middle">Redis</text>
+        <text x="835" y="407" fill="#94a3b8" font-size="8" text-anchor="middle">Session · Cache</text>
+
+        <!-- MinIO -->
+        <rect x="920" y="370" width="140" height="50" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="990" y="391" fill="white" font-size="11" font-weight="600" text-anchor="middle">MinIO / OSS</text>
+        <text x="990" y="407" fill="#94a3b8" font-size="8" text-anchor="middle">素材 · 图片 · 文件</text>
+
+        <!-- Milvus -->
+        <rect x="620" y="440" width="200" height="50" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="720" y="461" fill="white" font-size="11" font-weight="600" text-anchor="middle">Milvus / PGVector</text>
+        <text x="720" y="477" fill="#94a3b8" font-size="8" text-anchor="middle">商品向量 · Prompt模版 · 案例</text>
+
+        <!-- Clickhouse -->
+        <rect x="840" y="440" width="220" height="50" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="950" y="461" fill="white" font-size="11" font-weight="600" text-anchor="middle">ClickHouse / StarRocks</text>
+        <text x="950" y="477" fill="#94a3b8" font-size="8" text-anchor="middle">指标宽表 · OLAP 查询</text>
+
+        <!-- ========== EXTERNAL APIs ========== -->
+        <rect x="620" y="520" width="440" height="50" rx="6" fill="rgba(30, 41, 59, 0.5)" stroke="#94a3b8" stroke-width="1.5"/>
+        <text x="840" y="541" fill="white" font-size="11" font-weight="600" text-anchor="middle">外部数据源</text>
+        <text x="840" y="557" fill="#94a3b8" font-size="8" text-anchor="middle">领星ERP · Amazon SP-API · 广告API · 物流API</text>
+
+        <!-- ========== CONNECTING ARROWS ========== -->
+        <!-- Gateway → Java -->
+        <line x1="400" y1="70" x2="468" y2="70" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <text x="434" y="64" fill="#94a3b8" font-size="7" text-anchor="middle">REST</text>
+
+        <!-- Java → MQ → Python -->
+        <line x1="780" y1="209" x2="780" y2="390" stroke="#fb923c" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+        <text x="795" y="310" fill="#fb923c" font-size="8">任务事件</text>
+
+        <line x1="100" y1="390" x2="100" y2="322" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrow-cyan)"/>
+        <text x="115" y="350" fill="#22d3ee" font-size="8">结果回调</text>
+
+        <!-- Python → Data Stores -->
+        <line x1="415" y1="650" x2="618" y2="395" stroke="#a78bfa" stroke-width="1" marker-end="url(#arrow-violet)"/>
+        <line x1="165" y1="650" x2="685" y2="395" stroke="#a78bfa" stroke-width="1" marker-end="url(#arrow-violet)"/>
+
+        <!-- Java → Data -->
+        <line x1="780" y1="322" x2="780" y2="368" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrow-violet)"/>
+        <text x="765" y="345" fill="#94a3b8" font-size="7">JDBC</text>
+
+        <!-- External ← Java -->
+        <line x1="840" y1="322" x2="840" y2="518" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+        <!-- ========== LEGEND ========== -->
+        <rect x="1150" y="360" width="25" height="12" rx="2" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1"/>
+        <text x="1155" y="371" fill="#94a3b8" font-size="7">AI 层</text>
+        <rect x="1150" y="378" width="25" height="12" rx="2" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1"/>
+        <text x="1155" y="389" fill="#94a3b8" font-size="7">业务层</text>
+        <rect x="1150" y="396" width="25" height="12" rx="2" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1"/>
+        <text x="1155" y="407" fill="#94a3b8" font-size="7">数据层</text>
+        <rect x="1150" y="414" width="25" height="12" rx="2" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="1"/>
+        <text x="1155" y="425" fill="#94a3b8" font-size="7">网关</text>
+        <rect x="1150" y="432" width="25" height="12" rx="2" fill="rgba(30, 41, 59, 0.5)" stroke="#94a3b8" stroke-width="1"/>
+        <text x="1155" y="443" fill="#94a3b8" font-size="7">外部</text>
+        <rect x="1150" y="450" width="25" height="12" rx="2" fill="rgba(251, 146, 60, 0.3)" stroke="#fb923c" stroke-width="1"/>
+        <text x="1155" y="461" fill="#94a3b8" font-size="7">MQ</text>
+
+      </svg>
+    </div>
+
+    <!-- Cards -->
+    <div class="cards">
+      <div class="card">
+        <div class="card-header"><div class="card-dot cyan"></div><h3>AI 工作流 (LangGraph)</h3></div>
+        <ul>
+          <li>• 建品：素材 + LLM → 标题 · 卖点 · 图片方案</li>
+          <li>• 诊断：Text-to-SQL + 向量检索 → 归因报告</li>
+          <li>• 优化：历史案例推荐 + 任务生成</li>
+          <li>• 复盘：优化前后对比 + 经验沉淀入库</li>
+          <li>• 人类介入：interrupt() 暂停等运营确认</li>
+          <li>• 路径回放：Checkpoint 恢复任意历史状态</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-dot emerald"></div><h3>Java 服务层</h3></div>
+        <ul>
+          <li>• 权限管理：RBAC + 数据范围隔离</li>
+          <li>• 状态机：商品 · 任务生命周期流转</li>
+          <li>• 任务引擎：创建 → 分配 → 执行 → 验收</li>
+          <li>• 指标宽表：销售 · 库存 · 广告 · 内容多维度</li>
+          <li>• 结果落库：AI 产出持久化 + 版本管理</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-dot violet"></div><h3>数据与基础设施</h3></div>
+        <ul>
+          <li>• PostgreSQL：业务数据 · LangGraph State</li>
+          <li>• ClickHouse：指标宽表 · OLAP 实时查询</li>
+          <li>• Milvus：商品向量 · Prompt模版 · 案例检索</li>
+          <li>• RabbitMQ：Java ↔ Python 异步解耦</li>
+          <li>• MinIO：素材 · 图片 · 文件存储</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="footer">Luma AI Agent ERP · Java + Python 协同架构 · LangGraph 编排 · Text-to-SQL · 向量检索</p>
+  </div>
+</body>
+</html>
